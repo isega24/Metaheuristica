@@ -2,9 +2,9 @@
 PROGRAM=./Greedy-QAP.py
 SOLDIRECTORY=./qapsoln/
 DATADIRECTORY=./qapdata/
-ls=/bin/ls $(DATADIRECTORY)
-
+SHELL=/bin/bash
+DATAFILES=`ls -c $(DATADIRECTORY)`
 %:
-	$(PROGRAM) $(DATADIRECTORY)$@.dat $(SOLDIRECTORY)$@.sln
-all:
-	for OUT in $(DATADIRECTORY)*.dat;do echo $(OUT) ; done
+	$(PROGRAM) $@
+greedy:
+	./script.sh $(DATADIRECTORY) $(PROGRAM)
