@@ -5,10 +5,14 @@ import math
 from solucion import Permutacion
 from solucion import coste
 from solucion import readData,readSolution
+from time import time
+from random import seed,shuffle
 import numpy
 if len(sys.argv) < 2:
     print("Fatal Error, no file as input")
-
+if len(sys.argv) >=3:
+    randseed = int(sys.argv[2])
+    seed(randseed)
 fileName = sys.argv[1]
 solveName = "./qapsoln/"+fileName[10:-3]+"sln"
 
@@ -30,22 +34,29 @@ matrizDistancias = [[int(matrizDistancias[i][j]) for j in range(len(matrizDistan
 
 greedySolution = [-1 for i in range(n)]
 
+# Iniciamos el conteo de tiempo.
+tiempo_inicial = time()
 ordenFlujos = ordenSuma(matrizFlujos)[::-1]
 ordenDistancias = ordenSuma(matrizDistancias)
 
 for i in range(n):
     greedySolution[ordenDistancias[i][0]] = ordenFlujos[i][0]
+
+tiempo_greedy = time()
 # print(greedySolution)
 greedySol = Permutacion(P=greedySolution,F=matrizFlujos,D=matrizDistancias)
 print(greedySol)
+print("Tiempo:" + str(tiempo_greedy-tiempo_inicial))
 print( coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = greedySol.P))
 
 # Ahora comienza la búsqueda local.
-
-BLSol = greedySol.busquedaLocal()
+tiempo_inicio_BL = time()
+BLSol = greedySol.busquedaLocal(MaxIter=50000)
+tiempo_final_BL = time()
 
 
 print(BLSol)
+print("Tiempo:" + str(tiempo_greedy-tiempo_inicial + tiempo_final_BL - tiempo_inicio_BL))
 print( coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = BLSol.P))
 
 # Búsqueda local realizada.

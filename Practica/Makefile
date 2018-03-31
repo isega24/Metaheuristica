@@ -7,4 +7,4 @@ DATAFILES=`ls -c $(DATADIRECTORY)`
 %:
 	$(PROGRAM) $@
 greedy:
-	./script.sh $(DATADIRECTORY) $(PROGRAM)
+	./script.sh $(DATADIRECTORY) $(PROGRAM) ./solutionGreedy/

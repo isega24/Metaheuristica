@@ -1,3 +1,4 @@
+from random import shuffle
 def coste(matDist, matFlujo,perm):
     cost = 0
     for i in range(len(perm)):
@@ -9,7 +10,6 @@ def coste(matDist, matFlujo,perm):
 def readData(filename):
     with open(filename,'r') as infile:
         n = int(infile.readline())
-        infile.readline()
         #matrizFlujos = [infile.readline().split() for i in range(n)]
         archivo = infile.read().split()
         #print(archivo)
@@ -50,6 +50,10 @@ class Permutacion:
         self.F = F
         self.cost = cost
 
+    def randPerm(D,F):
+        perm = [i for i in range(len(D))]
+        shuffle(perm)
+        return Permutacion(P=perm,D=D,F=F)
     def permuta(self,i):
         if i >= 0 and i < len(self.P):
             return self.P[i]
@@ -120,13 +124,16 @@ class Permutacion:
                     for j in range(len(self.P)):
                         if j != i:
                             difCoste = mejorSol.difCoste(i,j)
+                            if MaxIter!=-1:
+                                it = it+1
                             if difCoste < 0:
                                 mejora = mejoraInterna = True
                                 bitsArray[i] = bitsArray[j] = 0
                                 mejorSol = mejorSol.vecino(i,j)
+                            if MaxIter<=it:
+                                return mejorSol
                     if mejoraInterna == False:
                         bitsArray[i] = 1
 
 
-            it = it+1
         return mejorSol
