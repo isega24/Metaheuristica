@@ -1,0 +1,22 @@
+Algoritmo Greedy\\ \hline
+Caso	Coste obtenido	Desv	Tiempo\\ \hline
+Chr22a& 17914& 191,00& 0,00\\ \hline
+Chr22b& 13510& 118,11& 0,00\\ \hline
+Chr25a& 18724& 393,26& 0,00\\ \hline
+Esc128& 224& 250,00& 0,00\\ \hline
+Had20& 7848& 13,38& 0,00\\ \hline
+Lipa60b& 3220394& 27,79& 0,00\\ \hline
+Lipa80b& 10043715& 29,36& 0,00\\ \hline
+Nug28& 6770& 31,05& 0,00\\ \hline
+Sko81& 108158& 18,86& 0,00\\ \hline
+Sko90& 135404& 17,20& 0,00\\ \hline
+Sko100a& 178508& 17,44& 0,00\\ \hline
+Sko100f& 173286& 16,27& 0,00\\ \hline
+Tai100a& 24041188& 14,20& 0,00\\ \hline
+Tai100b& 1838134036& 54,99& 0,00\\ \hline
+Tai150b& 653315921& 30,95& 0,00\\ \hline
+Tai256c& 98685678& 120,48& 0,00\\ \hline
+Tho40& 338210& 40,62& 0,00\\ \hline
+Tho150& 9795960& 20,44& 0,00\\ \hline
+Wil50& 55760& 14,22& 0,00\\ \hline
+Wil100& 302048& 10,62& 0,00\\ \hline

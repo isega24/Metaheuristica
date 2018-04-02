@@ -63,7 +63,7 @@ En esta sección vamos a explicar brevemente la configuración de una solución 
 
 \subsection{Solución.}
 
-Una solución está perfectamente determinada por un vector de $N$ componentes donde cada una de sus componentes es distinta unas de otras y el rango de valores difiere de 1 hasta N, o lo que es lo mismo, una permutación. Según la misma, la localización $i$ tendrá alojada la instalación con el número que ocupa en el vector la posición $i$.
+Una solución está perfectamente determinada por un vector de $N$ componentes donde cada una de sus componentes es distinta unas de otras y el rango de valores difiere de 1 hasta N, o lo que es lo mismo, una permutación. Según la misma, la localización $i$ tendrá alojada la instalación con el número que ocupa en el vector la posición $i$. Para agilizar cálculos, cada permutación, además, guarda su coste asociado. Así, será fácil calcular soluciones vecinas.
 
 \subsection{Función de coste.}
 
@@ -102,36 +102,123 @@ Para agilizar el proceso de busqueda del primer mejor, vamos a desarrollar una e
 Este algoritmo hace uso de dos funciones distintas. La primera, ordena las filas de una matriz por el valor de la suma de sus valores. No creo necesaria la inclusión de este código ya que cualquier lenguaje de medio nivel tiene una función genérica para ordenar vectores por alguna característica indeterminada. \\
 La segunda simplemente asigna la primera componente del vector ordenado de instalaciones a la última del vector ordenado de localizaciones. Más simple que la función anterior.
 
-
-
-
-
 \subsection{Algoritmo primer mejor: Don't look bits.}
 
 \subsubsection{Factorización de la busqueda local}
+Este método devuelve la diferencia de coste de la permutación actual si hubiesemos cambiado la instalación i donde la j y viceversa. Sus variables conocidas son la permutación actual y las matrices de Distancia y Flujo.\\
 
+
+\hline
 \begin{lstlisting}
-
+Parametros:D,F,P
+Input:i,j
+Output: dif
+dif=0
+$Modificamos dif con lo que cambian los costes de las localizaciones
+$i,j si estuviesen en las localizaciones cambiadas.
+dif+=F[i][i]*(D[P(j)][P(j)]-D[P(i)][P(i)])
+dif+=F[i][j]*(D[P(j)][P(i)]-D[P(i)][P(j)])
+dif+=F[j][i]*(D[P(i)][P(j)]-D[P(j)][P(i)])
+dif+=F[j][j]*(D[P(i)][P(i)]-D[P(j)][P(j)])
+De k = 1 hasta N con k!=i,j:
+  $Aniadimos lo que cambia su coste parcial si la instalacion
+  $k tuviese que mandar el flujo a las localizaciones i,j cambiadas.
+  dif+=F[k][i]*(D[P(k)][P(j)]-D[P(k)][P(i)])
+  dif+=F[k][j]*(D[P(k)][P(i)]-D[P(k)][P(j)])
+  dif+=F[i][k]*(D[P(j)][P(k)]-D[P(i)][P(k)])
+  dif+=F[j][k]*(D[P(i)][P(k)]-D[P(j)][P(k)])
+  
+return difCost
 \end{lstlisting}
+\hline
 
 \subsubsection{Generador de vecino}
-\begin{lstlisting}
+La forma de generar un vecino dado un ciclo de orden 2 (i,j) es tan simple como intercambiar en la permutación P propia las posiciones i y j y calcular su coste. Puesto que nuestra solución guarda su propio coste y se puede calcular de manera eficiente la diferencia del coste entre una solución y su vecina, el algoritmo queda así:\\
 
+\hline
+\begin{lstlisting}
+Parametros:D,F,P,coste
+Input:i,j
+Output: nuevaP,nuevoCoste
+
+nuevaP = P
+nuevaP[i] = P[j],nuevaP[j]=P[i]
+nuevoCoste = coste + difCoste(i,j)
+
+return nuevaP, nuevoCoste
 \end{lstlisting}
+\hline
+
+
+
 \subsubsection{Generador de soluciones aleatorias}
-\begin{lstlisting}
 
+Para generar soluciones aleatorias sólo necesitamos una permutación, la cual la podemos calcular con con el generador aleatorio de python, que tiene una función que mezcla un vector dado, $shuffle()$. Como hemos planteado la implementación de las soluciones, no es necesario calcular ahora mismo el coste que esta permutación tiene.\\
+
+\hline
+\begin{lstlisting}
+Output: nuevaP
+nuevaP = [1..N]\\vector ordenado de 1 hasta N
+shuffle(nuevaP)
+return nuevaP
 \end{lstlisting}
+\hline
+
 \subsubsection{Exploración del entorno con restricción DLB.}
-
+Este método comienza con una solución que es una copia de la solución de arranque y la vamos modificando. Como entrada solo necesitamos un máximo de evaluaciones de la función coste(aunque sólo será necesario llamar a difCoste). \\
+\hline
 \begin{lstlisting}
-
+Parametros:mejorSol
+Input:MaxEval
+Output: nuevaP
+bitsArray =[0..0]\\vector con N elementos todos 0.
+eval=0
+Mientras no sobrepasemos MaxEval y mejore en cada iteracion:
+  Para cada elemento i de la permutacion:
+    Si su bit esta activo:
+      exploraVecinos(i)
+    Si no ha conseguido mejorar por aqui:
+	  Cambiamos su bit a 1(inactivo)
+      
+return mejorSol
 \end{lstlisting}
+\hline\\
+
+
+La función exploravecinos(i) no es una función que hayamos implementado, lo usamos aquí para que sea más entendible. Aquí el pseudocódigo dentro de la misma:\\
+
+\hline
+\begin{lstlisting}
+Parametros:mejorSol
+Input:MaxEval,i
+
+Para cada j =1..N distinto de i:
+  \\Como calculamos difcoste, aniadimos 1 al contador de evaluaciones
+  eval+=1
+  Si difcoste(i,j) < 0(mejora a la actual):
+    Los bits de i y de j se ponen a 0(activos)
+    Se reconoce que en esta iteracion han habido mejoras.
+    Se cambia mejorSol por este vecino
+  Si hemos evaluado ya MaxEval veces la funcion difcoste:
+    return mejorSol
+\end{lstlisting}
+\hline
+
+
 
 \newpage
 
 \section{Algoritmo de comparación.}
+En esta sección se compararán los resultados de los algoritmos Greedy y búsqueda local. Para dicha comparación, atenderemos a dos estadísticos:\\
 
+\begin{itemize}
+	\item \textbf{Desviación a la solución óptima.} Este estadístico evaluará proporcionalmente la diferencia de coste de la mejor solución y la solución obtenida en cada instancia.La fórmula que describe este estadístico es el siguiente:
+	\[Desv = \dfrac{1}{ \left| casos\right|}\sum_{i \in casos}100\dfrac{valorAlg_i - mejorVal_i}{mejorVal_i} \]
+	
+	\item \textbf{Tiempo medio de ejecución.} La media de los tiempos de ejecución de cada algoritmo.
+\end{itemize}
+
+Consideraremos entonces que un algoritmo es mejor que otro si la desviación a la solución óptima es menor. En caso de ser iguales, el algoritmo que tarde menos será considerado mejor.
 
 
 \newpage
@@ -143,7 +230,7 @@ Para la implementación de la práctica hemos utilizado el lenguaje precompilado
 La forma de utilizar el programa es la siguiente:\\
 
 \begin{itemize}
-	\item \textbf{Programa.} El programa recibe como argumento el nombre del archivo de entrada con los datos(terminado en ".dat"), que debe de estar en el directorio $./qapdata/$. Tiene que haber también un archivo solución con el mismo nombre pero con terminación ".sln" en el directorio $./qapsoln/$. Es posible también introducir una semilla como segundo argumento, aunque para este programa no la utilizamos:\\
+	\item \textbf{Programa.} El programa recibe como argumento el nombre del archivo de entrada con los datos(terminado en '.dat'), que debe de estar en el directorio $./qapdata/$. Tiene que haber también un archivo solución con el mismo nombre pero con terminación '.sln'  en el directorio $./qapsoln/$. Es posible también introducir una semilla como segundo argumento, aunque para este programa no la utilizamos:\\
 	
 	$./Greedy-QAP$ $./qapdata/nombredatos.dat$ $semilla$\\
 	
@@ -164,7 +251,106 @@ La forma de utilizar el programa es la siguiente:\\
 \newpage
 \section{Experimento y análisis de resultados.}
 
+Las tablas obtenidas para cada algoritmo son las siguientes:\\
 
+
+\textbf{Algoritmo Greedy}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|}
+			\hline
+			Caso & Coste obtenido & Desv & Tiempo\\
+			\hline \hline
+			Chr22a& 17914& 191,00& 0,00\\ \hline
+			Chr22b& 13510& 118,11& 0,00\\ \hline
+			Chr25a& 18724& 393,26& 0,00\\ \hline
+			Esc128& 224& 250,00& 0,00\\ \hline
+			Had20& 7848& 13,38& 0,00\\ \hline
+			Lipa60b& 3220394& 27,79& 0,00\\ \hline
+			Lipa80b& 10043715& 29,36& 0,00\\ \hline
+			Nug28& 6770& 31,05& 0,00\\ \hline
+			Sko81& 108158& 18,86& 0,00\\ \hline
+			Sko90& 135404& 17,20& 0,00\\ \hline
+			Sko100a& 178508& 17,44& 0,00\\ \hline
+			Sko100f& 173286& 16,27& 0,00\\ \hline
+			Tai100a& 24041188& 14,20& 0,00\\ \hline
+			Tai100b& 1838134036& 54,99& 0,00\\ \hline
+			Tai150b& 653315921& 30,95& 0,00\\ \hline
+			Tai256c& 98685678& 120,48& 0,00\\ \hline
+			Tho40& 338210& 40,62& 0,00\\ \hline
+			Tho150& 9795960& 20,44& 0,00\\ \hline
+			Wil50& 55760& 14,22& 0,00\\ \hline
+			Wil100& 302048& 10,62& 0,00\\ \hline
+		\end{tabular}
+		\caption{Datos obtenidos para el algoritmo de BL}
+		\label{tabla:DatosGreedy}
+	\end{center}
+\end{table}
+
+Lo más reseñable de este algoritmo es el poco tiempo que se necesita para su ejecución. Esto ocurre por que se puede ordenar vectores en un tiempo $O(nlog(n))$, que es la base de nuestro algoritmo Greedy. \\
+
+Cabe destacar también la diferencia de desviaciones en distintas instancias. Esto puede llegar a concluir que este algoritmo es muy inestable, ya que la instancia hace variar mucho la calidad de la solución obtenida.
+
+\newpage
+
+
+\textbf{Algoritmo búsqueda local}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|}
+			\hline
+			Caso & Coste obtenido & Desv & Tiempo\\
+			\hline \hline
+			Chr22a& 6780& 10,14& 0,10\\ \hline
+			Chr22b& 7374& 19,05& 0,08\\ \hline
+			Chr25a& 5900& 55,43& 0,14\\ \hline
+			Esc128& 78& 21,88& 10,34\\ \hline
+			Had20& 6984& 0,90& 0,07\\ \hline
+			Lipa60b& 2520135& 0,00& 1,91\\ \hline
+			Lipa80b& 9486256& 22,18& 3,12\\ \hline
+			Nug28& 5396& 4,45& 0,19\\ \hline
+			Sko81& 93940& 3,23& 7,16\\ \hline
+			Sko90& 118358& 2,44& 8,03\\ \hline
+			Sko100a& 155784& 2,49& 12,98\\ \hline
+			Sko100f& 151836& 1,88& 14,47\\ \hline
+			Tai100a& 21907238& 4,06& 7,61\\ \hline
+			Tai100b& 1277987724& 7,76& 12,80\\ \hline
+			Tai150b& 517267383& 3,68& 33,30\\ \hline
+			Tai256c& 45345150& 1,31& 59,07\\ \hline
+			Tho40& 254682& 5,89& 0,54\\ \hline
+			Tho150& 8390704& 3,16& 35,37\\ \hline
+			Wil50& 49702& 1,81& 1,14\\ \hline
+			Wil100& 276048& 1,10& 13,24\\ \hline
+		\end{tabular}
+		\caption{Datos obtenidos para el algoritmo de búsqueda local}
+		\label{tabla:DatosBL-DLB}
+	\end{center}
+\end{table}
+
+Este algoritmo vemos que llega a tardar en algunas instancias hasta un minuto, tiempos muy superiores a los tiempos anteriores(menos de una centésima).\\
+
+Sin embargo, las desviaciones de este son mucho menores, llegando incluso a alcanzar en la instancia $Lipa60b$ su solución óptima conocida. 
+
+
+\newpage
+Por último, la tabla de comparación de algoritmos:
+
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			Algoritmo &  Desv & Tiempo\\
+			\hline \hline
+			Greedy& 71.75 & 0,00\\ \hline
+			BL& 8.64& 11.08\\ \hline
+			
+		\end{tabular}
+		\caption{Tabla de comparación}
+		\label{tabla:TablaComparacion}
+	\end{center}
+\end{table}
+
+Una vez vistos estos algoritmos, es fácil declarar que el algoritmo de Búsqueda local es mucho mejor a la hora de comparar la desviación del algoritmo. También es verdad, sin embargo, que el algoritmo de búsqueda local parte de una solución dada y la mejora. Como hemos utilizado de solución base la obtenida con el algoritmo Greedy es normal que el segundo se desvíe menos de la mejor solución. Sin embargo, la mejora es bastante notable. Tardar de media 11 segundos en hacer una mejora de alrededor de 60 puntos en el estadístico de Desviación es un intercambio bastante favorable.
 
 
 \end{document}

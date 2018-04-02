@@ -99,12 +99,9 @@ class Permutacion:
         nuevaPemutacion = [i for i in self.P]
         nuevaPemutacion[r],nuevaPemutacion[s] = nuevaPemutacion[s],nuevaPemutacion[r]
 
-
         # Diferencia de coste
-        costeReal = coste( matDist = self.D, matFlujo = self.F,perm = nuevaPemutacion)
+
         difCost = self.difCoste(r,s)
-        if abs(difCost) != abs(self.coste() - costeReal):
-            print("Que esta pasando:",r,s,abs(difCost) == abs(self.coste() - costeReal))
         nuevoCoste = self.coste() + difCost
         #print(coste( matDist = self.D, matFlujo = self.F,perm = nuevaPemutacion),nuevoCoste,difCost,nuevoCoste-coste( matDist = self.D, matFlujo = self.F,perm = nuevaPemutacion))
         # Creacion de el nuevo objeto Permutacion:
@@ -130,7 +127,7 @@ class Permutacion:
                                 mejora = mejoraInterna = True
                                 bitsArray[i] = bitsArray[j] = 0
                                 mejorSol = mejorSol.vecino(i,j)
-                            if MaxIter<=it:
+                            if MaxIter<=it and MaxIter!=-1:
                                 return mejorSol
                     if mejoraInterna == False:
                         bitsArray[i] = 1

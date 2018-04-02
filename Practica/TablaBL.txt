@@ -1,0 +1,22 @@
+Algoritmo BL-DLB
+Caso	Coste obtenido	Desv	Tiempo\\ \hline
+Chr22a& 6780& 10,14& 0,10\\ \hline
+Chr22b& 7374& 19,05& 0,08\\ \hline
+Chr25a& 5900& 55,43& 0,14\\ \hline
+Esc128& 78& 21,88& 10,34\\ \hline
+Had20& 6984& 0,90& 0,07\\ \hline
+Lipa60b& 2520135& 0,00& 1,91\\ \hline
+Lipa80b& 9486256& 22,18& 3,12\\ \hline
+Nug28& 5396& 4,45& 0,19\\ \hline
+Sko81& 93940& 3,23& 7,16\\ \hline
+Sko90& 118358& 2,44& 8,03\\ \hline
+Sko100a& 155784& 2,49& 12,98\\ \hline
+Sko100f& 151836& 1,88& 14,47\\ \hline
+Tai100a& 21907238& 4,06& 7,61\\ \hline
+Tai100b& 1277987724& 7,76& 12,80\\ \hline
+Tai150b& 517267383& 3,68& 33,30\\ \hline
+Tai256c& 45345150& 1,31& 59,07\\ \hline
+Tho40& 254682& 5,89& 0,54\\ \hline
+Tho150& 8390704& 3,16& 35,37\\ \hline
+Wil50& 49702& 1,81& 1,14\\ \hline
+Wil100& 276048& 1,10& 13,24\\ \hline

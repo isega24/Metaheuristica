@@ -11,8 +11,8 @@
 \contentsline {subsection}{\numberline {3.2}Algoritmo primer mejor: Don't look bits.}{6}
 \contentsline {subsubsection}{\numberline {3.2.1}Factorizaci\IeC {\'o}n de la busqueda local}{6}
 \contentsline {subsubsection}{\numberline {3.2.2}Generador de vecino}{6}
-\contentsline {subsubsection}{\numberline {3.2.3}Generador de soluciones aleatorias}{6}
-\contentsline {subsubsection}{\numberline {3.2.4}Exploraci\IeC {\'o}n del entorno con restricci\IeC {\'o}n DLB.}{6}
-\contentsline {section}{\numberline {4}Algoritmo de comparaci\IeC {\'o}n.}{7}
-\contentsline {section}{\numberline {5}Manual de uso.}{8}
-\contentsline {section}{\numberline {6}Experimento y an\IeC {\'a}lisis de resultados.}{9}
+\contentsline {subsubsection}{\numberline {3.2.3}Generador de soluciones aleatorias}{7}
+\contentsline {subsubsection}{\numberline {3.2.4}Exploraci\IeC {\'o}n del entorno con restricci\IeC {\'o}n DLB.}{7}
+\contentsline {section}{\numberline {4}Algoritmo de comparaci\IeC {\'o}n.}{9}
+\contentsline {section}{\numberline {5}Manual de uso.}{10}
+\contentsline {section}{\numberline {6}Experimento y an\IeC {\'a}lisis de resultados.}{11}

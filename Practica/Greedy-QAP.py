@@ -46,8 +46,8 @@ tiempo_greedy = time()
 # print(greedySolution)
 greedySol = Permutacion(P=greedySolution,F=matrizFlujos,D=matrizDistancias)
 print(greedySol)
-print("Tiempo:" + str(tiempo_greedy-tiempo_inicial))
-print( coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = greedySol.P))
+print("TiempoGreedy:\t" + str(tiempo_greedy-tiempo_inicial))
+print("CosteGreedy:\t"+ str(coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = greedySol.P)))
 
 # Ahora comienza la búsqueda local.
 tiempo_inicio_BL = time()
@@ -56,8 +56,8 @@ tiempo_final_BL = time()
 
 
 print(BLSol)
-print("Tiempo:" + str(tiempo_greedy-tiempo_inicial + tiempo_final_BL - tiempo_inicio_BL))
-print( coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = BLSol.P))
+print("TiempoBL:\t" + str(tiempo_greedy-tiempo_inicial + tiempo_final_BL - tiempo_inicio_BL))
+print("CosteBL:\t" +str(coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = BLSol.P)))
 
 # Búsqueda local realizada.
 
@@ -69,20 +69,4 @@ mejorPerm, newCost = readSolution(solveName)
 mejorSol = Permutacion(P=mejorPerm,F=matrizFlujos,D = matrizDistancias)
 
 print(mejorSol)
-print(newCost)
-
-
-
-
-
-
-
-
-
-# Escritura de fichero.
-'''
-with open(fileName,'w') as outfile:
-    outfile.write(str(len(slices))+'\n')
-    for sl in slices:
-        outfile.write(sl+'\n')
-'''
+print("Mejor:\t"+str(newCost))
