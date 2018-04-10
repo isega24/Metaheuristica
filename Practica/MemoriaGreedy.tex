@@ -254,38 +254,7 @@ La forma de utilizar el programa es la siguiente:\\
 Las tablas obtenidas para cada algoritmo son las siguientes:\\
 
 
-\textbf{Algoritmo Greedy}
-\begin{table}[htbp]
-	\begin{center}
-		\begin{tabular}{|l|l|l|l|}
-			\hline
-			Caso & Coste obtenido & Desv & Tiempo\\
-			\hline \hline
-			Chr22a& 17914& 191,00& 0,00\\ \hline
-			Chr22b& 13510& 118,11& 0,00\\ \hline
-			Chr25a& 18724& 393,26& 0,00\\ \hline
-			Esc128& 224& 250,00& 0,00\\ \hline
-			Had20& 7848& 13,38& 0,00\\ \hline
-			Lipa60b& 3220394& 27,79& 0,00\\ \hline
-			Lipa80b& 10043715& 29,36& 0,00\\ \hline
-			Nug28& 6770& 31,05& 0,00\\ \hline
-			Sko81& 108158& 18,86& 0,00\\ \hline
-			Sko90& 135404& 17,20& 0,00\\ \hline
-			Sko100a& 178508& 17,44& 0,00\\ \hline
-			Sko100f& 173286& 16,27& 0,00\\ \hline
-			Tai100a& 24041188& 14,20& 0,00\\ \hline
-			Tai100b& 1838134036& 54,99& 0,00\\ \hline
-			Tai150b& 653315921& 30,95& 0,00\\ \hline
-			Tai256c& 98685678& 120,48& 0,00\\ \hline
-			Tho40& 338210& 40,62& 0,00\\ \hline
-			Tho150& 9795960& 20,44& 0,00\\ \hline
-			Wil50& 55760& 14,22& 0,00\\ \hline
-			Wil100& 302048& 10,62& 0,00\\ \hline
-		\end{tabular}
-		\caption{Datos obtenidos para el algoritmo de BL}
-		\label{tabla:DatosGreedy}
-	\end{center}
-\end{table}
+\input{./tablasLatex/Greedy.txt}
 
 Lo más reseñable de este algoritmo es el poco tiempo que se necesita para su ejecución. Esto ocurre por que se puede ordenar vectores en un tiempo $O(nlog(n))$, que es la base de nuestro algoritmo Greedy. \\
 
@@ -293,39 +262,7 @@ Cabe destacar también la diferencia de desviaciones en distintas instancias. Es
 
 \newpage
 
-
-\textbf{Algoritmo búsqueda local}
-\begin{table}[htbp]
-	\begin{center}
-		\begin{tabular}{|l|l|l|l|}
-			\hline
-			Caso & Coste obtenido & Desv & Tiempo\\
-			\hline \hline
-			Chr22a& 6780& 10,14& 0,10\\ \hline
-			Chr22b& 7374& 19,05& 0,08\\ \hline
-			Chr25a& 5900& 55,43& 0,14\\ \hline
-			Esc128& 78& 21,88& 10,34\\ \hline
-			Had20& 6984& 0,90& 0,07\\ \hline
-			Lipa60b& 2520135& 0,00& 1,91\\ \hline
-			Lipa80b& 9486256& 22,18& 3,12\\ \hline
-			Nug28& 5396& 4,45& 0,19\\ \hline
-			Sko81& 93940& 3,23& 7,16\\ \hline
-			Sko90& 118358& 2,44& 8,03\\ \hline
-			Sko100a& 155784& 2,49& 12,98\\ \hline
-			Sko100f& 151836& 1,88& 14,47\\ \hline
-			Tai100a& 21907238& 4,06& 7,61\\ \hline
-			Tai100b& 1277987724& 7,76& 12,80\\ \hline
-			Tai150b& 517267383& 3,68& 33,30\\ \hline
-			Tai256c& 45345150& 1,31& 59,07\\ \hline
-			Tho40& 254682& 5,89& 0,54\\ \hline
-			Tho150& 8390704& 3,16& 35,37\\ \hline
-			Wil50& 49702& 1,81& 1,14\\ \hline
-			Wil100& 276048& 1,10& 13,24\\ \hline
-		\end{tabular}
-		\caption{Datos obtenidos para el algoritmo de búsqueda local}
-		\label{tabla:DatosBL-DLB}
-	\end{center}
-\end{table}
+\input{./tablasLatex/BL.txt}
 
 Este algoritmo vemos que llega a tardar en algunas instancias hasta un minuto, tiempos muy superiores a los tiempos anteriores(menos de una centésima).\\
 

@@ -13,6 +13,12 @@ if len(sys.argv) < 2:
 if len(sys.argv) >=3:
     randseed = int(sys.argv[2])
     seed(randseed)
+
+printFile = ""
+if len(sys.argv) >= 4:
+    printFile = sys.argv[3]
+
+
 fileName = sys.argv[1]
 solveName = "./qapsoln/"+fileName[10:-3]+"sln"
 
@@ -45,28 +51,30 @@ for i in range(n):
 tiempo_greedy = time()
 # print(greedySolution)
 greedySol = Permutacion(P=greedySolution,F=matrizFlujos,D=matrizDistancias)
-print(greedySol)
-print("TiempoGreedy:\t" + str(tiempo_greedy-tiempo_inicial))
-print("CosteGreedy:\t"+ str(coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = greedySol.P)))
 
-# Ahora comienza la búsqueda local.
-tiempo_inicio_BL = time()
-BLSol = greedySol.busquedaLocal(MaxIter=50000)
-tiempo_final_BL = time()
+with open(printFile,'w') as f:
+    f.write(str(greedySol)+"\n")
+    f.write("TiempoGreedy:\t" + str(tiempo_greedy-tiempo_inicial))
+    f.write("\nCosteGreedy:\t"+ str(coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = greedySol.P))+"\n")
 
-
-print(BLSol)
-print("TiempoBL:\t" + str(tiempo_greedy-tiempo_inicial + tiempo_final_BL - tiempo_inicio_BL))
-print("CosteBL:\t" +str(coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = BLSol.P)))
-
-# Búsqueda local realizada.
+    # Ahora comienza la búsqueda local.
+    tiempo_inicio_BL = time()
+    BLSol = greedySol.busquedaLocal(MaxIter=50000)
+    tiempo_final_BL = time()
 
 
+    f.write(str(BLSol))
+    f.write("\nTiempoBL:\t" + str(tiempo_greedy-tiempo_inicial + tiempo_final_BL - tiempo_inicio_BL))
+    f.write("\nCosteBL:\t" +str(coste( matDist = matrizDistancias, matFlujo = matrizFlujos,perm = BLSol.P))+"\n")
 
-mejorPerm, newCost = readSolution(solveName)
+    # Búsqueda local realizada.
 
 
-mejorSol = Permutacion(P=mejorPerm,F=matrizFlujos,D = matrizDistancias)
 
-print(mejorSol)
-print("Mejor:\t"+str(newCost))
+    mejorPerm, newCost = readSolution(solveName)
+
+
+    mejorSol = Permutacion(P=mejorPerm,F=matrizFlujos,D = matrizDistancias)
+
+    f.write(str(mejorSol))
+    f.write("\nMejor:\t"+str(newCost)+"\n")

@@ -1,0 +1,32 @@
+\textbf{Algoritmo Greedy}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Caso & MejorCoste & Coste obtenido & Desviación & tiempo \\
+			\hline \hline
+			chr22a & 6156 & 17914 & 191.0 & 0.0\\ \hline
+			chr22b & 6194 & 13510 & 118.11 & 0.0\\ \hline
+			chr25a & 3796 & 18724 & 393.25 & 0.0\\ \hline
+			esc128 & 64 & 224 & 250.0 & 0.0\\ \hline
+			had20 & 6922 & 7848 & 13.37 & 0.0\\ \hline
+			lipa60b & 2520135 & 3220394 & 27.78 & 0.0\\ \hline
+			lipa80b & 7763962 & 10043715 & 29.36 & 0.0\\ \hline
+			nug28 & 5166 & 6770 & 31.04 & 0.0\\ \hline
+			sko81 & 90998 & 108158 & 18.85 & 0.0\\ \hline
+			sko90 & 115534 & 135404 & 17.19 & 0.0\\ \hline
+			sko100a & 152002 & 178508 & 17.43 & 0.0\\ \hline
+			sko100f & 149036 & 173286 & 16.27 & 0.0\\ \hline
+			tai100a & 21052466 & 24041188 & 14.19 & 0.0\\ \hline
+			tai100b & 1185996137 & 1838134036 & 54.98 & 0.0\\ \hline
+			tai150b & 498896643 & 653315921 & 30.95 & 0.0\\ \hline
+			tai256c & 44759294 & 98685678 & 120.48 & 0.0\\ \hline
+			tho40 & 240516 & 338210 & 40.61 & 0.0\\ \hline
+			tho150 & 8133398 & 9795960 & 20.44 & 0.0\\ \hline
+			wil50 & 48816 & 55760 & 14.22 & 0.0\\ \hline
+			wil100 & 273038 & 302048 & 10.62 & 0.0\\ \hline
+			\end{tabular}
+		\caption{Datos obtenidos para el algoritmo Greedy}
+		\label{tabla:DatosGreedy}
+	\end{center}
+\end{table}

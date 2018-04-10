@@ -1,0 +1,32 @@
+\textbf{Algoritmo Genetico1}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Caso & MejorCoste & Coste obtenido & Desviación & tiempo \\
+			\hline \hline
+			chr22a & 6156 & 6746 & 9.58 & 6.03\\ \hline
+			chr22b & 6194 & 6968 & 12.49 & 5.97\\ \hline
+			chr25a & 3796 & 5336 & 40.56 & 7.08\\ \hline
+			esc128 & 64 & 212 & 231.25 & 29.87\\ \hline
+			had20 & 6922 & 6926 & 0.05 & 5.33\\ \hline
+			lipa60b & 2520135 & 3132679 & 24.3 & 16.68\\ \hline
+			lipa80b & 7763962 & 9891908 & 27.4 & 21.18\\ \hline
+			nug28 & 5166 & 5498 & 6.42 & 8.31\\ \hline
+			sko81 & 90998 & 102606 & 12.75 & 20.93\\ \hline
+			sko90 & 115534 & 130692 & 13.11 & 23.13\\ \hline
+			sko100a & 152002 & 170032 & 11.86 & 25.29\\ \hline
+			sko100f & 149036 & 168444 & 13.02 & 25.2\\ \hline
+			tai100a & 21052466 & 23539044 & 11.81 & 25.75\\ \hline
+			tai100b & 1185996137 & 1549729274 & 30.66 & 25.84\\ \hline
+			tai150b & 498896643 & 622228445 & 24.72 & 36.36\\ \hline
+			tai256c & 44759294 & 50108798 & 11.95 & 64.21\\ \hline
+			tho40 & 240516 & 267114 & 11.05 & 11.65\\ \hline
+			tho150 & 8133398 & 9521134 & 17.06 & 36.05\\ \hline
+			wil50 & 48816 & 51934 & 6.38 & 13.76\\ \hline
+			wil100 & 273038 & 293142 & 7.36 & 25.55\\ \hline
+			\end{tabular}
+		\caption{Datos obtenidos para el algoritmo Genetico1}
+		\label{tabla:DatosGenetico1}
+	\end{center}
+\end{table}
