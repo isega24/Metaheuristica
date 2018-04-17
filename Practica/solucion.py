@@ -108,6 +108,13 @@ class Permutacion:
 
         return Permutacion(P= nuevaPemutacion, D = self.D, F = self.F,cost = nuevoCoste)
 
+    def vecinoSinEva(self,r,s):
+        # Cambiar los términos de la la permutacion.
+        nuevaPemutacion = [i for i in self.P]
+        nuevaPemutacion[r],nuevaPemutacion[s] = nuevaPemutacion[s],nuevaPemutacion[r]
+        perm = Permutacion(P= nuevaPemutacion, D = self.D, F = self.F)
+        return perm
+
     def busquedaLocal(self,MaxIter=-1):
         it = 0
         bitsArray = [0 for i in range(len(self.P))]
@@ -128,9 +135,8 @@ class Permutacion:
                                 bitsArray[i] = bitsArray[j] = 0
                                 mejorSol = mejorSol.vecino(i,j)
                             if MaxIter<=it and MaxIter!=-1:
-                                return mejorSol
+                                return mejorSol,it
                     if mejoraInterna == False:
                         bitsArray[i] = 1
 
-
-        return mejorSol
+        return mejorSol,it

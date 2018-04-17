@@ -108,7 +108,7 @@ La segunda simplemente asigna la primera componente del vector ordenado de insta
 Este método devuelve la diferencia de coste de la permutación actual si hubiesemos cambiado la instalación i donde la j y viceversa. Sus variables conocidas son la permutación actual y las matrices de Distancia y Flujo.\\
 
 
-\hline
+
 \begin{lstlisting}
 Parametros:D,F,P
 Input:i,j
@@ -130,12 +130,12 @@ De k = 1 hasta N con k!=i,j:
   
 return difCost
 \end{lstlisting}
-\hline
+
 
 \subsubsection{Generador de vecino}
 La forma de generar un vecino dado un ciclo de orden 2 (i,j) es tan simple como intercambiar en la permutación P propia las posiciones i y j y calcular su coste. Puesto que nuestra solución guarda su propio coste y se puede calcular de manera eficiente la diferencia del coste entre una solución y su vecina, el algoritmo queda así:\\
 
-\hline
+
 \begin{lstlisting}
 Parametros:D,F,P,coste
 Input:i,j
@@ -147,7 +147,7 @@ nuevoCoste = coste + difCoste(i,j)
 
 return nuevaP, nuevoCoste
 \end{lstlisting}
-\hline
+
 
 
 
@@ -155,18 +155,18 @@ return nuevaP, nuevoCoste
 
 Para generar soluciones aleatorias sólo necesitamos una permutación, la cual la podemos calcular con con el generador aleatorio de python, que tiene una función que mezcla un vector dado, $shuffle()$. Como hemos planteado la implementación de las soluciones, no es necesario calcular ahora mismo el coste que esta permutación tiene.\\
 
-\hline
+
 \begin{lstlisting}
 Output: nuevaP
 nuevaP = [1..N]\\vector ordenado de 1 hasta N
 shuffle(nuevaP)
 return nuevaP
 \end{lstlisting}
-\hline
+
 
 \subsubsection{Exploración del entorno con restricción DLB.}
 Este método comienza con una solución que es una copia de la solución de arranque y la vamos modificando. Como entrada solo necesitamos un máximo de evaluaciones de la función coste(aunque sólo será necesario llamar a difCoste). \\
-\hline
+
 \begin{lstlisting}
 Parametros:mejorSol
 Input:MaxEval
@@ -182,12 +182,11 @@ Mientras no sobrepasemos MaxEval y mejore en cada iteracion:
       
 return mejorSol
 \end{lstlisting}
-\hline\\
+
 
 
 La función exploravecinos(i) no es una función que hayamos implementado, lo usamos aquí para que sea más entendible. Aquí el pseudocódigo dentro de la misma:\\
 
-\hline
 \begin{lstlisting}
 Parametros:mejorSol
 Input:MaxEval,i
@@ -202,7 +201,6 @@ Para cada j =1..N distinto de i:
   Si hemos evaluado ya MaxEval veces la funcion difcoste:
     return mejorSol
 \end{lstlisting}
-\hline
 
 
 

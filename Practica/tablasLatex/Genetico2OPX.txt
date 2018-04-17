@@ -1,0 +1,32 @@
+\textbf{Algoritmo Genetico2OPX}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Caso & MejorCoste & Coste obtenido & Desviación & tiempo \\
+			\hline \hline
+			chr22a & 6156 & 7072 & 14.87 & 4.72\\ \hline
+			chr22b & 6194 & 6840 & 10.42 & 4.63\\ \hline
+			chr25a & 3796 & 5602 & 47.57 & 5.51\\ \hline
+			esc128 & 64 & 74 & 15.62 & 98.23\\ \hline
+			had20 & 6922 & 6922 & 0.0 & 4.06\\ \hline
+			lipa60b & 2520135 & 3023777 & 19.98 & 26.9\\ \hline
+			lipa80b & 7763962 & 9534143 & 22.79 & 45.89\\ \hline
+			nug28 & 5166 & 5306 & 2.71 & 6.82\\ \hline
+			sko81 & 90998 & 94872 & 4.25 & 44.22\\ \hline
+			sko90 & 115534 & 121362 & 5.04 & 53.62\\ \hline
+			sko100a & 152002 & 160428 & 5.54 & 66.14\\ \hline
+			sko100f & 149036 & 157454 & 5.64 & 66.18\\ \hline
+			tai100a & 21052466 & 22523706 & 6.98 & 70.44\\ \hline
+			tai100b & 1185996137 & 1290564064 & 8.81 & 69.53\\ \hline
+			tai150b & 498896643 & 582733862 & 16.8 & 153.33\\ \hline
+			tai256c & 44759294 & 48057102 & 7.36 & 440.28\\ \hline
+			tho40 & 240516 & 254506 & 5.81 & 12.17\\ \hline
+			tho150 & 8133398 & 9158476 & 12.6 & 156.49\\ \hline
+			wil50 & 48816 & 49998 & 2.42 & 17.5\\ \hline
+			wil100 & 273038 & 282292 & 3.38 & 65.5\\ \hline
+			\end{tabular}
+		\caption{Datos obtenidos para el algoritmo Genetico2OPX}
+		\label{tabla:DatosGenetico2OPX}
+	\end{center}
+\end{table}

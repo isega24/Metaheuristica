@@ -56,24 +56,24 @@ class Poblacion:
         self.F = matFlujo
         self.n = Nind
         self.popu = primeraGeneracion(matDist=self.D,matFlujo=self.F,Nindividuos=self.n)
-        self.mejor = self.mejorPoblActual()
+        self.mejor = self.mejorPoblActual(self.popu)
         self.p_cruce = p_cruce
         self.p_muta = p_muta
 
-    def mejorPoblActual(self):
-        costeMin = self.popu[0].coste()
-        mejorSol = self.popu[0]
-        for i in self.popu:
+    def mejorPoblActual(self,hijos):
+        costeMin = hijos[0].coste()
+        mejorSol = hijos[0]
+        for i in hijos:
             nuevoCoste = i.coste()
             if nuevoCoste < costeMin:
                 mejorSol = i
                 costeMin = nuevoCoste
         return mejorSol
-    def peorActual(self):
-        costeMax = self.popu[0].coste()
+    def peorActual(self,hijos):
+        costeMax = hijos[0].coste()
         peorSol = 0
-        for i in range(len(self.popu)):
-            nuevoCoste = self.popu[i].coste()
+        for i in range(len(hijos)):
+            nuevoCoste = hijos[i].coste()
             if nuevoCoste > costeMax:
                 peorSol = i
                 costeMax = nuevoCoste
@@ -108,7 +108,7 @@ class Poblacion:
         # Sobre cada individuo(id):
         #   Sobre cada (i,j) posible ciclo (i!=j)
 
-        mutaciones = max(int(len(listaPadres)*len(self.D)**2 *self.p_muta),1)
+        mutaciones = max(int(len(listaPadres)*((len(self.D)**2-len(self.D))/2) *self.p_muta),1)
 
         ##### Las mutaciones son vecinos de la solucion. Cuentan como evaluaciones.
         numEvaluaciones+= mutaciones
@@ -120,19 +120,40 @@ class Poblacion:
             j = int(confPerm/len(self.D))
             if i <=j:
                 j += 1
-            hijos[Ind] = hijos[Ind].vecino(i,j)
+            if hijos[Ind].cost == None:
+                hijos[Ind] = hijos[Ind].vecinoSinEva(i,j)
+            else:
+                hijos[Ind] = hijos[Ind].vecino(i,j)
 
         # Ahora seleccionamos al mejor de las poblaciones.
 
 
-        mejoractual = self.mejorPoblActual()
+        mejoractual = self.mejorPoblActual(hijos)
 
 
         if self.mejor.coste() > mejoractual.coste():
             self.mejor = mejoractual
         else:
-            hijos[self.peorActual()] = self.mejor
+            hijos[self.peorActual(hijos)] = self.mejor
 
         self.popu = hijos
 
         return numEvaluaciones
+
+
+    def aplicaBL(self,maxEval = 50000,prob = 0.1,mejores = False,nSteps = 400):
+
+        if mejores:
+            self.popu.sort(key=lambda individuo: individuo.coste())
+        elif prob != 1.0:
+            random.shuffle(self.popu)
+        nIndivMejorados = int(prob*len(self.popu))
+        mejoras = 0
+        i = 0
+        while mejoras < maxEval and i < nIndivMejorados:
+
+            self.popu[i],mejorasI = self.popu[i].busquedaLocal(min(nSteps,maxEval-mejoras))
+            mejoras += mejorasI
+
+            i+=1
+        return mejoras

@@ -46,7 +46,7 @@ ordenFlujos = ordenSuma(matrizFlujos)[::-1]
 ordenDistancias = ordenSuma(matrizDistancias)
 
 for i in range(n):
-    greedySolution[ordenDistancias[i][0]] = ordenFlujos[i][0]
+    greedySolution[ordenFlujos[i][0]] =  ordenDistancias[i][0]
 
 tiempo_greedy = time()
 # print(greedySolution)
@@ -59,7 +59,7 @@ with open(printFile,'w') as f:
 
     # Ahora comienza la búsqueda local.
     tiempo_inicio_BL = time()
-    BLSol = greedySol.busquedaLocal(MaxIter=50000)
+    BLSol,j = Permutacion.randPerm(F=matrizFlujos,D=matrizDistancias).busquedaLocal(MaxIter=50000)
     tiempo_final_BL = time()
 
 
