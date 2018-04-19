@@ -42,7 +42,7 @@ n = 0
 while i < 50000:
     n+=1
     i += Pobl.proximaGeneracion()
-    if n %30 == 0:
+    if n %10 == 0:
         i+= Pobl.aplicaBL(maxEval=50000-i,prob=0.1,mejores = True,nSteps = 400)
         #i+=Pobl.aplicaBL(maxEval=50000-i,prob=0.1,mejores = True,nSteps = 400)
         print(str(int(i/500.0))+"%  en la generacion "+str(n))
