@@ -1,0 +1,2 @@
+define(["require","exports","tslib","spectrum/comments/fake/person/index"],function(e,t,r,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),r.__exportStar(s,t)});
+//# sourceMappingURL=person.bundled.min.js-vflZ3tIby.map

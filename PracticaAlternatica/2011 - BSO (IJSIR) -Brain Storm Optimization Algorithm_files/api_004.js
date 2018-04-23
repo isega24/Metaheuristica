@@ -1,0 +1,2 @@
+define(["require","exports","modules/clean/ajax_as_promised"],function(e,s,r){"use strict";function t(e,s,t){var i={is_package:e.isPackage,link_key:e.linkKey,link_type:e.linkType,secure_hash:e.secureHash,subpath:e.subPath};return e.itemId&&(i.item_id=e.itemId),new Promise(function(e,u){return r.WebProgressRequest({url:"/sm/c2d",data:i,progress_text:t,subject_user:s,success:e})})}Object.defineProperty(s,"__esModule",{value:!0}),s.copySharedFile=t});
+//# sourceMappingURL=api.min.js-vfl6NoFS7.map

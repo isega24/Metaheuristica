@@ -1,0 +1,2 @@
+define(["require","exports"],function(e,t){"use strict";function n(e){return e.comments2}function r(e){return n(e).threads||[]}Object.defineProperty(t,"__esModule",{value:!0}),t.getComments2State=n,t.getThreads=r});
+//# sourceMappingURL=selectors.min.js-vflsr1fjl.map

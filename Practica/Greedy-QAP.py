@@ -59,7 +59,8 @@ with open(printFile,'w') as f:
 
     # Ahora comienza la búsqueda local.
     tiempo_inicio_BL = time()
-    BLSol,j = Permutacion.randPerm(F=matrizFlujos,D=matrizDistancias).busquedaLocal(MaxIter=50000)
+    #BLSol,j = Permutacion.randPerm(F=matrizFlujos,D=matrizDistancias).busquedaLocal(MaxIter=50000)
+    BLSol,j = Permutacion.randPerm(F=matrizFlujos,D=matrizDistancias).busquedaLocal()
     tiempo_final_BL = time()
 
 

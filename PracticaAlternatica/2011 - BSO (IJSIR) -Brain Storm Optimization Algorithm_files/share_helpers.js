@@ -1,0 +1,2 @@
+define(["require","exports","modules/clean/react/file_viewer/file_utils"],function(e,i,l){"use strict";function n(i,n,o,t){e(["modules/clean/sharing/share_modal_util"],function(e){var a={beaconContext:i.beacon_context,filename:l.getFilename(i),isFolder:!1,nsId:i.ns_id,origin:t,sjid:i.sjid,url:o||void 0,fqPath:""};l.isBrowseFile(i)&&(a.fqPath=i.fq_path),null!=i.file_id&&(a.fileId=i.file_id),e.showShareModal(n,a,{})})}Object.defineProperty(i,"__esModule",{value:!0}),i.share=n});
+//# sourceMappingURL=share_helpers.min.js-vfls8zS38.map

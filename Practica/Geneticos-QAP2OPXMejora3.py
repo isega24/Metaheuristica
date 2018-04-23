@@ -33,6 +33,7 @@ matrizFlujos = [[int(matrizFlujos[i][j]) for j in range(len(matrizFlujos[i]))] f
 matrizDistancias = [[int(matrizDistancias[i][j]) for j in range(len(matrizDistancias[i]))] for i in range(len(matrizFlujos))]
 
 # Lectura del problema hecho.
+tam = len(matrizDistancias)
 
 tiempo_inicial = time()
 # Primer algoritmo.
@@ -43,8 +44,9 @@ while i < 50000:
     n+=1
     i += Pobl.proximaGeneracion()
     if n %10 == 0:
-        i+= Pobl.aplicaBL(maxEval=50000-i,prob=0.1,mejores = True,nSteps = 400)
-        #i+=Pobl.aplicaBL(maxEval=50000-i,prob=0.1,mejores = True,nSteps = 400)
+        #p = Pobl.aplicaBL(maxEval=50000-i,prob=0.07,mejores = True,nSteps = tam*(tam-1))
+        #i+=p*20/tam
+        i+=Pobl.aplicaBL(maxEval=50000-i,prob=0.1,mejores = True,nSteps = 400)
         print(str(int(i/500.0))+"%  en la generacion "+str(n))
         print("Mejor coste hasta ahora: "+str(Pobl.mejor.coste()))
 
@@ -67,3 +69,4 @@ with open(printFile,'w') as f:
 
     f.write(str(mejorSol)+"\n")
     f.write("Mejor:\t"+str(newCost)+"\n")
+    print("Mejor real:"+str(newCost))
