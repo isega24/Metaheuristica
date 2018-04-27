@@ -21,10 +21,13 @@ TABLAS=./tablas/
 SHELL=/bin/bash
 
 
-all:todoGreedy todoGenetico1 todoGenetico2 todoGenetico1opx todoGenetico2opx todoGenetico2opxm1 todoGenetico2opxm2 todoGenetico2opxm3
+
+all:todoGreedy todoGenetico1 todoGenetico2 todoGenetico1opx todoGenetico2opx todoGenetico2opxm1 todoGenetico2opxm2 todoGenetico2opxm3 graficos
 	@ echo Todo hecho
 estadisticos:estadisticosGreedy estadisticosGenetico1 estadisticosGenetico2 estadisticosGenetico1opx estadisticosGenetico2opx estadisticosGenetico2opxm1 estadisticosGenetico2opxm2 estadisticosGenetico2opxm3
 	@ echo Hecho
+
+
 
 datos:datosGreedy datosGenetico1 datosGenetico2 datosGenetico1opx datosGenetico2opx datosGenetico2opxm1 datosGenetico2opxm2 datosGenetico2opxm3
 	@ echo Hecho
@@ -193,3 +196,9 @@ tablaLatexgenetico2opxm3:
 
 estadisticosGenetico2opxm3:
 	./estadisticos.py Genetico2OPXM3
+
+
+graficos:
+	@ echo Comenzando la recolecta de datos gráficos
+	./AllGraphics.sh
+	./graficosComparativa.sh

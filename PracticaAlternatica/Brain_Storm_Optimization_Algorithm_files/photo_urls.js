@@ -1,0 +1,2 @@
+define(["require","exports"],function(e,c){"use strict";Object.defineProperty(c,"__esModule",{value:!0}),c.photoUrls=["https://s-media-cache-ak0.pinimg.com/originals/61/db/2e/61db2e04ecbed3906e92d9dcd3fe3da5.jpg","https://pbs.twimg.com/profile_images/3767742377/21958baac9afb1167f61f73597ef8d64.jpeg","http://search.lostpetusa.net/petimages/256/af9360a3-584e-405a-bb67-887730a341b3.jpg","https://i.pinimg.com/236x/46/c6/c7/46c6c75f563cfd38381bef5cc7681179--blue-french-bulldog-puppies-blue-french-bulldogs.jpg"]});
+//# sourceMappingURL=photo_urls.bundled.min.js-vflAw9T5H.map

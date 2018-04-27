@@ -45,8 +45,8 @@ while i < 50000:
     i += Pobl.proximaGeneracion()
     if n %10 == 0:
         i+=Pobl.aplicaBL(maxEval=50000-i,prob=0.1,mejores = False,nSteps = 400)
-        #print(str(int(i/500.0))+"%  en la generacion "+str(n))
-        #print("Mejor coste hasta ahora: "+str(Pobl.mejor.coste()))
+    print(str(int(i/500.0))+"%  en la generacion "+str(n))
+    print("Mejor coste hasta ahora: "+str(Pobl.mejor.coste()))
 
 
 tiempo_final = time()

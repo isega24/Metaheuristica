@@ -1,0 +1,2 @@
+define(["require","exports","classnames","react","spectrum/comments/comment_editor/index"],function(e,t,r,n,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.ThreadEditor=function(e){var t=e.author,a=r({"sc-thread-editor":!0});return n.createElement("div",{className:a},n.createElement(o.CommentEditor,{author:t}))}});
+//# sourceMappingURL=thread_editor.bundled.min.js-vflHBToUC.map

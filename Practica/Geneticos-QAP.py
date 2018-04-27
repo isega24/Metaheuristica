@@ -40,11 +40,11 @@ Pobl = Poblacion(matDist=matrizDistancias,matFlujo=matrizFlujos,Nind=50)
 i = 0
 n = 0
 while i < 50000:
-    if n %25== 0:
+    #if n %25== 0:
         #print("Costes de la poblacion:")
         #print([i.coste() for i in Pobl.popu])
-        print(str(int(i/500.0))+"%  en la generacion "+str(n))
-        print("Mejor coste hasta ahora:"+str(Pobl.mejor.coste()))
+    print(str(int(i/500.0))+"%  en la generacion "+str(n))
+    print("Mejor coste hasta ahora: "+str(Pobl.mejor.coste()))
     #print(i)
     n+=1
     i += Pobl.proximaGeneracion()

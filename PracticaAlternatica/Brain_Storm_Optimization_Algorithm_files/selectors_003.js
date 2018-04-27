@@ -1,0 +1,2 @@
+define(["require","exports","modules/clean/video_annotations_prototype/store/reducer"],function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.getVideoAnnotationState=function(t){return t[n.VIDEO_ANNOTATION_REDUCER_KEY]},e.getComments=function(t){return e.getVideoAnnotationState(t).comments||[]},e.getHasOnboarded=function(t){return e.getVideoAnnotationState(t).hasOnboarded!==!1},e.getOwnersToNotify=function(t){return e.getVideoAnnotationState(t).ownersToNotify||[]}});
+//# sourceMappingURL=selectors.min.js-vflRVA2WH.map
