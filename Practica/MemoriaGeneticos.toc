@@ -1,0 +1,19 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Descripci\IeC {\'o}n del problema QAP}{3}
+\contentsline {section}{\numberline {2}Breve descripci\IeC {\'o}n de los algor\IeC {\'\i }tmos utilizados.}{4}
+\contentsline {subsection}{\numberline {2.1}Soluci\IeC {\'o}n.}{4}
+\contentsline {subsection}{\numberline {2.2}Funci\IeC {\'o}n de coste.}{4}
+\contentsline {subsection}{\numberline {2.3}Algoritmos gen\IeC {\'e}ticos.}{4}
+\contentsline {subsubsection}{\numberline {2.3.1}Algoritmo gen\IeC {\'e}tico con reemplazo VS estacionario}{6}
+\contentsline {subsection}{\numberline {2.4}Algoritmos mem\IeC {\'e}ticos.}{7}
+\contentsline {section}{\numberline {3}Pseudoc\IeC {\'o}digos y explicaciones.}{8}
+\contentsline {subsection}{\numberline {3.1}AG generacional.}{8}
+\contentsline {subsection}{\numberline {3.2}AG estacionario.}{8}
+\contentsline {subsection}{\numberline {3.3}Algoritmos mem\IeC {\'e}ticos}{8}
+\contentsline {subsection}{\numberline {3.4}Consideraciones de parada del algoritmo.}{10}
+\contentsline {section}{\numberline {4}Algoritmo de comparaci\IeC {\'o}n.}{11}
+\contentsline {section}{\numberline {5}Manual de uso.}{12}
+\contentsline {section}{\numberline {6}Experimento y an\IeC {\'a}lisis de resultados.}{14}
+\contentsline {subsection}{\numberline {6.1}An\IeC {\'a}lisis de resultados}{21}
+\contentsline {subsection}{\numberline {6.2}An\IeC {\'a}lisis de AG generacionales.}{25}
+\contentsline {subsection}{\numberline {6.3}Posibles mejoras de los algoritmos}{28}
