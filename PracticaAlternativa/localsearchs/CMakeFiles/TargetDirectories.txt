@@ -1,0 +1,4 @@
+/home/ivan/Documentos/Github/Metaheuristica/PracticaAlternatica/localsearchs/CMakeFiles/edit_cache.dir
+/home/ivan/Documentos/Github/Metaheuristica/PracticaAlternatica/localsearchs/CMakeFiles/rebuild_cache.dir
+/home/ivan/Documentos/Github/Metaheuristica/PracticaAlternatica/localsearchs/CMakeFiles/example_ls.dir
+/home/ivan/Documentos/Github/Metaheuristica/PracticaAlternatica/localsearchs/CMakeFiles/localsearch.dir

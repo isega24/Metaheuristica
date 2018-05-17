@@ -19,3 +19,5 @@ TARGET_LINK_LIBRARIES(localsearch)
 
 ADD_EXECUTABLE(example_ls example.cc)
 TARGET_LINK_LIBRARIES(example_ls localsearch)
+
+ADD_EXECUTABLE(brainStormAlgorithm brainStormAlgorithm.cc)
