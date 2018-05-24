@@ -7,6 +7,9 @@ GENETICO2OPX=./Geneticos-QAP2OPX.py
 GENETICO2OPXM1=./Geneticos-QAP2OPXMejora1.py
 GENETICO2OPXM2=./Geneticos-QAP2OPXMejora2.py
 GENETICO2OPXM3=./Geneticos-QAP2OPXMejora3.py
+ES=./ES-QAP.py
+BMB=./BMB-QAP.py
+GRASP=./GRASP-QAP.py
 SOLDIRECTORY=./qapsoln/
 DATADIRECTORY=./qapdata/
 DATAGREEDY=./solutionGreedy/
@@ -17,6 +20,9 @@ DATAGENETICO2OPX=./solutionGenetico2OPX/
 DATAGENETICO2OPXM1=./solutionGenetico2OPXMejora1/
 DATAGENETICO2OPXM2=./solutionGenetico2OPXMejora2/
 DATAGENETICO2OPXM3=./solutionGenetico2OPXMejora3/
+DATAES=./solutionES/
+DATAGRASP=./solutionGRASP/
+DATABMB=./solutionBMB/
 TABLAS=./tablas/
 SHELL=/bin/bash
 
@@ -24,13 +30,29 @@ SHELL=/bin/bash
 
 all:todoGreedy todoGenetico1 todoGenetico2 todoGenetico1opx todoGenetico2opx todoGenetico2opxm1 todoGenetico2opxm2 todoGenetico2opxm3 graficos
 	@ echo Todo hecho
-estadisticos:estadisticosGreedy estadisticosGenetico1 estadisticosGenetico2 estadisticosGenetico1opx estadisticosGenetico2opx estadisticosGenetico2opxm1 estadisticosGenetico2opxm2 estadisticosGenetico2opxm3
+estadisticos:estadisticosGreedy estadisticosGenetico1 estadisticosGenetico2 estadisticosGenetico1opx estadisticosGenetico2opx estadisticosGenetico2opxm1 estadisticosGenetico2opxm2 estadisticosGenetico2opxm3 estadisticosES
 	@ echo Hecho
 
-
-
-datos:datosGreedy datosGenetico1 datosGenetico2 datosGenetico1opx datosGenetico2opx datosGenetico2opxm1 datosGenetico2opxm2 datosGenetico2opxm3
+datos:datosGreedy datosGenetico1 datosGenetico2 datosGenetico1opx datosGenetico2opx datosGenetico2opxm1 datosGenetico2opxm2 datosGenetico2opxm3 datosES datosGRASP
 	@ echo Hecho
+
+todoGRASP:GRASP datosGRASP
+	echo Hecho
+
+datosGRASP:tablasGRASP tablaLatexGRASP
+	echo Datos Recabados
+
+todoES:ES datosES
+	echo Hecho
+
+datosES:tablasES tablaLatexES
+	echo Datos Recabados
+
+todoBMB:BMB datosBMB
+	echo Hecho
+
+datosBMB:tablasBMB tablaLatexBMB
+	echo Datos Recabados
 
 todoGreedy:greedy datosGreedy
 	echo Todo Greedy y BL
@@ -196,6 +218,49 @@ tablaLatexgenetico2opxm3:
 
 estadisticosGenetico2opxm3:
 	./estadisticos.py Genetico2OPXM3
+
+
+ES:
+	./obtenerDatos.sh $(DATADIRECTORY) $(ES) $(DATAES)
+
+tablasES:
+	./obtenerTabla.sh $(DATAES) $(TABLAS) ES
+
+tablaLatexES:
+	mkdir -p tablasLatex
+	./tablasLatex.py ES > ./tablasLatex/ES.txt
+
+estadisticosES:
+	./estadisticos.py ES
+
+
+GRASP:
+	./obtenerDatos.sh $(DATADIRECTORY) $(GRASP) $(DATAGRASP)
+
+tablasGRASP:
+	./obtenerTabla.sh $(DATAGRASP) $(TABLAS) GRASP
+
+tablaLatexGRASP:
+	mkdir -p tablasLatex
+	./tablasLatex.py GRASP > ./tablasLatex/GRASP.txt
+
+estadisticosGRASP:
+	./estadisticos.py GRASP
+
+
+
+BMB:
+	./obtenerDatos.sh $(DATADIRECTORY) $(BMB) $(DATABMB)
+
+tablasBMB:
+	./obtenerTabla.sh $(DATABMB) $(TABLAS) BMB
+
+tablaLatexBMB:
+	mkdir -p tablasLatex
+	./tablasLatex.py BMB > ./tablasLatex/BMB.txt
+
+estadisticosBMB:
+	./estadisticos.py BMB
 
 
 graficos:

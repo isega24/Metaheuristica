@@ -9,14 +9,6 @@ def eucDist(p1,p2):
     return d
 
 
-def coste(punto):
-    cost = 0
-
-    for i in punto:
-        cost += abs(math.cos(20*i))
-    return cost
-
-
 def clusDist(c1,c2):
     dist = eucDist(c1[0],c2[0])
     for i in c1:

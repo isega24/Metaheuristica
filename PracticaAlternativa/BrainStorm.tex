@@ -41,7 +41,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Brainstorm optimization}
+	\frametitle{Brainstorm optimization. Clustering.}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.7\linewidth]{clusterIdeas}
@@ -51,7 +51,20 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Brainstorm optimization}
+	\frametitle{Brainstorm optimization. Clustering.}
+	En el paper no se realiza ninguna propuesta. Aquí algunos métodos de clustering:\\
+	\begin{itemize}
+		\item Clustering por cercanía.
+		\item Clustering por centroide.
+		\item Distribución, densidad...
+	\end{itemize}
+	En el ejemplo hemos utilizado el primer tipo, siendo la función de distancia de un cluster a otro:\\
+	
+	\[d(C1,C2) = min\{d(x,y):x	\in C1, y \in C2 \}\]
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Selección de centros de clusters.}
 	
 	\[coste(x) = \sum \left| cos(x_i) \right| \]
 	\begin{figure}
@@ -66,7 +79,7 @@
 \begin{frame}
 	\frametitle{Brainstorm optimization}
 	\begin{itemize}
-		\item \textbf{Posible mutación de algún representante de cluster.}
+		\item \textbf{Posible mutación de alguna idea.}
 		
 		\begin{itemize}
 			\item  \[X^d_{new} <-X^d_{selected} + \psi \times n(0,1) \]
@@ -93,6 +106,72 @@
 		\includegraphics[width=0.4\linewidth]{normal.png}
 		\label{fig:normal}
 	\end{figure}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Combinación de ideas prometedoras.}
+	
+	Ninguna propuesta en el paper, pero:
+	
+	\begin{itemize}
+		\item $X_{new} = \dfrac{X_1+X_2}{2}$ (Media aritmética)
+		\item $X_{new} = X_1 + F\times(X_2-X_3)$ (Recombinación diferencial)
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Procedimiento.}
+	\textbf{¿Cómo se escogen las ideas a modificar?}
+	\begin{itemize}
+		\item Los centros de cluster suelen ser la mejor opción para modificar.
+		\item Podemos alcanzar ideas mejores a partir de explorar una idea buena o recombinando varias ideas buenas(aleatoriamente).
+		\item Los clusters con más ideas se  modificarán con más frecuencia.
+		\item Nos quedaremos con los individuos que mejoren a su idea predecesora.(Posible mejora?).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Selección de parámetros.}
+	
+	\begin{array}{|l|l|l|l|l|l|}
+		\hline
+		n & m & p_{mutación}& p_{explotación} & p_{clusterCenter} & p_{comb. Centros} \\ \hline
+		100 & 5 & 0.2 & 0.8 & 0.4 & 0.5 \\ \hline
+	\end{array} 
+	
+	\begin{array}{|l|l|l|l|}
+		\hline
+		k & Max_{iteraciones} & \mu & \sigma \\ \hline
+		20 & 2000 & 0 & 1\\ \hline
+	\end{array} 
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Brainstorm optimization: Comparación}
+	Comparaciones en el paper...
+	\begin{itemize}
+		\item  \textbf{Sphere:} $f(X)=\sum_{i=0}^{d}X_i^2$
+		\item \textbf{Rastrigin:} $f(X)=\sum_{i=0}^{d}(X_i^2-10cos(2\pi X_i)+10)$
+	\end{itemize}
+	
+	\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{TablaResultadosPaper}
+	\label{fig:TablaResultadosPaper}
+	\end{figure}
+
+	
+	
+	
 	
 \end{frame}
 

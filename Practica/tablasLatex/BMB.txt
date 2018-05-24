@@ -1,0 +1,32 @@
+\textbf{Algoritmo BMB}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Caso & MejorCoste & Coste obtenido & Desviación & tiempo \\
+			\hline \hline
+			chr22a & 6156 & 6724 & 9.22 & 2.0\\ \hline
+			chr22b & 6194 & 6666 & 7.62 & 2.0\\ \hline
+			chr25a & 3796 & 4378 & 15.33 & 3.25\\ \hline
+			esc128 & 64 & 64 & 0.0 & 273.21\\ \hline
+			had20 & 6922 & 6926 & 0.05 & 1.91\\ \hline
+			lipa60b & 2520135 & 3013709 & 19.58 & 45.25\\ \hline
+			lipa80b & 7763962 & 9432954 & 21.49 & 105.96\\ \hline
+			nug28 & 5166 & 5228 & 1.2 & 4.06\\ \hline
+			sko81 & 90998 & 92424 & 1.56 & 150.09\\ \hline
+			sko90 & 115534 & 117116 & 1.36 & 217.47\\ \hline
+			sko100a & 152002 & 154106 & 1.38 & 293.62\\ \hline
+			sko100f & 149036 & 151002 & 1.31 & 306.29\\ \hline
+			tai100a & 21052466 & 21757970 & 3.35 & 202.3\\ \hline
+			tai100b & 1185996137 & 1212906623 & 2.26 & 368.28\\ \hline
+			tai150b & 498896643 & 511511720 & 2.52 & 936.04\\ \hline
+			tai256c & 44759294 & 44987524 & 0.5 & 1577.52\\ \hline
+			tho40 & 240516 & 245976 & 2.27 & 16.21\\ \hline
+			tho150 & 8133398 & 8320706 & 2.3 & 924.12\\ \hline
+			wil50 & 48816 & 49298 & 0.98 & 34.56\\ \hline
+			wil100 & 273038 & 275080 & 0.74 & 338.91\\ \hline
+			\end{tabular}
+		\caption{Datos obtenidos para el algoritmo BMB}
+		\label{tabla:DatosBMB}
+	\end{center}
+\end{table}

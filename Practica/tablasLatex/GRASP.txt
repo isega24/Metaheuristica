@@ -1,0 +1,32 @@
+\textbf{Algoritmo GRASP}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Caso & MejorCoste & Coste obtenido & Desviación & tiempo \\
+			\hline \hline
+			chr22a & 6156 & 6980 & 13.38 & 2.46\\ \hline
+			chr22b & 6194 & 7408 & 19.59 & 2.42\\ \hline
+			chr25a & 3796 & 5334 & 40.51 & 3.67\\ \hline
+			esc128 & 64 & 76 & 18.75 & 566.26\\ \hline
+			had20 & 6922 & 7054 & 1.9 & 2.08\\ \hline
+			lipa60b & 2520135 & 3015919 & 19.67 & 60.97\\ \hline
+			lipa80b & 7763962 & 9440860 & 21.59 & 151.35\\ \hline
+			nug28 & 5166 & 5408 & 4.68 & 5.32\\ \hline
+			sko81 & 90998 & 93130 & 2.34 & 217.09\\ \hline
+			sko90 & 115534 & 119252 & 3.21 & 308.18\\ \hline
+			sko100a & 152002 & 155056 & 2.0 & 447.73\\ \hline
+			sko100f & 149036 & 151684 & 1.77 & 444.82\\ \hline
+			tai100a & 21052466 & 21993896 & 4.47 & 319.97\\ \hline
+			tai100b & 1185996137 & 1286891273 & 8.5 & 492.47\\ \hline
+			tai150b & 498896643 & 516889122 & 3.6 & 1524.88\\ \hline
+			tai256c & 44759294 & 45167794 & 0.91 & 6074.08\\ \hline
+			tho40 & 240516 & 253520 & 5.4 & 21.26\\ \hline
+			tho150 & 8133398 & 8353892 & 2.71 & 1482.37\\ \hline
+			wil50 & 48816 & 49360 & 1.11 & 41.98\\ \hline
+			wil100 & 273038 & 276202 & 1.15 & 421.24\\ \hline
+			\end{tabular}
+		\caption{Datos obtenidos para el algoritmo GRASP}
+		\label{tabla:DatosGRASP}
+	\end{center}
+\end{table}
