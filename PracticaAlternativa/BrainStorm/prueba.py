@@ -2,44 +2,65 @@
 
 import sys
 import numpy as np
-from benchmark import Benchmark
+#from benchmark import Benchmark
 import math
 import random
 
 from solution import *
 
 
-if len(sys.argv) < 6:
-    print("Use: ./main.py <problem id> <dimension> <n_ideas> <seed> <output file>")
-    sys.exit()
-idProblem = int(sys.argv[1])
-dimension = int(sys.argv[2])
-nIdeas = int(sys.argv[3])
-seed = int(sys.argv[4])
-outFile = sys.argv[5]
+dimension = 2
+nIdeas = 20
+
 nClusters = 5
 random.seed(None)
-bench = Benchmark()
-coste = bench.getFuncion(idProblem)
+#bench = Benchmark()
+def coste(array):
+    cost = 0
+    for i in array:
+        cost+=i**2
+    return cost
 
 
-inf = bench.getLimInf()
-sup = bench.getLimSup()
+inf = -100 #bench.getLimInf()
+sup = 100.0 #bench.getLimSup()
 
 ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
 # Primeras ideas creadas. Ahora el algoritmo...
-nEval = 2000
+nEval = 1000
 for i in range(nEval):
     # Copiamos las ideas en el orden en el que estan
     newIdeas = [idea.copia() for idea in ideas]
+    clusters = clustering(newIdeas)
+    if i%10==0:
+        j=0
+        print("Generacion " + str(i))
+        for m in clusters:
+            print("Cluster "+str(j))
+            j+=1
+
+            for k in m.ideas:
+                string = ""
+                for v in k.array:
+                    string += str(v)+"\t"
+
+                print(string)
+
+        for m in clusters:
+            print("Mejor representante:")
+            string = ""
+            represent = m.clusterRepresent()
+            for j in represent.array:
+                string += str(j) + "\t"
+            print(string)
 
     # Generamos los clusters a partir de las ideas de esta fase.
     modify = False
-    clusters = clustering(newIdeas)
     Fails = 0
     while not modify and Fails < 2000:
-        #if i %5 == 0:
         Fails+=1
+        #if i %5 == 0:
+
         # Vemos si tenemos que mutar algun representande de cluster.
         muteProb = random.random()
         if muteProb < 0.2:
@@ -109,9 +130,6 @@ for i in range(nEval):
                     ideas[idea1Selected.id].cambia(idea1Selected)
                     modify = True
 
-    if i % 1==0:
-        print(i)
-        print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
 
 
 
