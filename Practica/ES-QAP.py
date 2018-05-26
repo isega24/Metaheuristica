@@ -37,34 +37,7 @@ tiempo_inicial = time()
 # Algoritmo.
 
 mejorSol = Permutacion.randPerm(D=matrizDistancias,F=matrizFlujos)
-solVecina = mejorSol.copia()
-mejorCoste = mejorSol.coste()
-maxExitos = len(matrizFlujos)
-maxVecinosGenerados = 10*maxExitos
-M = 50000/maxVecinosGenerados
-T0 = 0.3*mejorCoste/(-math.log(0.3))
-TF = min(T0,1.0/1000)
-beta = (T0-TF)/(M*T0*TF)
-
-T = T0
-while T > TF:
-    exitos = 0
-    vecinosgenerados = 0
-    while exitos < maxExitos and maxVecinosGenerados > vecinosgenerados:
-        randNum = randrange(len(matrizFlujos)**2-len(matrizFlujos))
-
-        j = randNum//len(matrizFlujos)
-        i = randNum%len(matrizFlujos)
-        vecinosgenerados+=1
-        if j >= i:
-            j+=1
-        difCost = solVecina.difCoste(i,j)
-        if difCost < 0 or random()<= math.exp(-difCost/T):
-            solVecina = solVecina.vecino(i,j)
-            if solVecina.coste() < mejorCoste:
-                mejorCoste = solVecina.coste()
-                mejorSol = solVecina.copia()
-    T = T/(1+beta*T)
+mejorSol = mejorSol.ES(nBusquedas=50000)
 
 tiempo_final = time()
 

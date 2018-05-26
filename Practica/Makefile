@@ -10,6 +10,8 @@ GENETICO2OPXM3=./Geneticos-QAP2OPXMejora3.py
 ES=./ES-QAP.py
 BMB=./BMB-QAP.py
 GRASP=./GRASP-QAP.py
+ILS=./ILS-QAP.py
+ILS-ES=./ILS-ES-QAP.py
 SOLDIRECTORY=./qapsoln/
 DATADIRECTORY=./qapdata/
 DATAGREEDY=./solutionGreedy/
@@ -23,18 +25,34 @@ DATAGENETICO2OPXM3=./solutionGenetico2OPXMejora3/
 DATAES=./solutionES/
 DATAGRASP=./solutionGRASP/
 DATABMB=./solutionBMB/
+DATAILS=./solutionILS/
+DATAILS-ES=./solutionILS-ES/
 TABLAS=./tablas/
 SHELL=/bin/bash
 
 
 
-all:todoGreedy todoGenetico1 todoGenetico2 todoGenetico1opx todoGenetico2opx todoGenetico2opxm1 todoGenetico2opxm2 todoGenetico2opxm3 graficos
+all:todoGreedy todoGenetico1 todoGenetico2 todoGenetico1opx todoGenetico2opx todoGenetico2opxm1 todoGenetico2opxm2 todoGenetico2opxm3 graficos todoES todoBMB todoILS todoGRASP todoILS-ES
 	@ echo Todo hecho
-estadisticos:estadisticosGreedy estadisticosGenetico1 estadisticosGenetico2 estadisticosGenetico1opx estadisticosGenetico2opx estadisticosGenetico2opxm1 estadisticosGenetico2opxm2 estadisticosGenetico2opxm3 estadisticosES
+estadisticos:estadisticosGreedy estadisticosGenetico1 estadisticosGenetico2 estadisticosGenetico1opx estadisticosGenetico2opx estadisticosGenetico2opxm1 estadisticosGenetico2opxm2 estadisticosGenetico2opxm3 estadisticosES estadisticosBMB estadisticosGRASP estadisticosILS estadisticosILS-ES
 	@ echo Hecho
 
-datos:datosGreedy datosGenetico1 datosGenetico2 datosGenetico1opx datosGenetico2opx datosGenetico2opxm1 datosGenetico2opxm2 datosGenetico2opxm3 datosES datosGRASP
+datos:datosGreedy datosGenetico1 datosGenetico2 datosGenetico1opx datosGenetico2opx datosGenetico2opxm1 datosGenetico2opxm2 datosGenetico2opxm3 datosES datosGRASP datosILS datosBMB datosILS-ES
 	@ echo Hecho
+
+
+
+todoILS:ILS datosILS
+	echo Hecho
+
+datosILS:tablasILS tablaLatexILS
+	echo Datos Recabados
+
+todoILS-ES:ILS-ES datosILS-ES
+	echo Hecho
+
+datosILS-ES:tablasILS-ES tablaLatexILS-ES
+	echo Datos Recabados
 
 todoGRASP:GRASP datosGRASP
 	echo Hecho
@@ -261,6 +279,35 @@ tablaLatexBMB:
 
 estadisticosBMB:
 	./estadisticos.py BMB
+
+
+
+ILS:
+	./obtenerDatos.sh $(DATADIRECTORY) $(ILS) $(DATAILS)
+
+tablasILS:
+	./obtenerTabla.sh $(DATAILS) $(TABLAS) ILS
+
+tablaLatexILS:
+	mkdir -p tablasLatex
+	./tablasLatex.py ILS > ./tablasLatex/ILS.txt
+
+estadisticosILS:
+	./estadisticos.py ILS
+
+
+ILS-ES:
+	./obtenerDatos.sh $(DATADIRECTORY) $(ILS-ES) $(DATAILS-ES)
+
+tablasILS-ES:
+	./obtenerTabla.sh $(DATAILS-ES) $(TABLAS) ILS-ES
+
+tablaLatexILS-ES:
+	mkdir -p tablasLatex
+	./tablasLatex.py ILS-ES > ./tablasLatex/ILS-ES.txt
+
+estadisticosILS-ES:
+	./estadisticos.py ILS-ES
 
 
 graficos:

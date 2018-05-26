@@ -1,4 +1,5 @@
-from random import shuffle
+from random import shuffle, randrange, random
+import math
 def coste(matDist, matFlujo,perm):
     cost = 0
     for i in range(len(perm)):
@@ -140,3 +141,57 @@ class Permutacion:
                         bitsArray[i] = 1
 
         return mejorSol,it
+
+    def ES(self,nBusquedas=50000):
+        mejorSol = self.copia()
+        solVecina = mejorSol.copia()
+        mejorCoste = mejorSol.coste()
+        maxExitos = len(self.P)
+        maxVecinosGenerados = 10*maxExitos
+        M = nBusquedas/maxVecinosGenerados
+        T0 = 0.3*mejorCoste/(-math.log(0.3))
+        TF = min(T0,1.0/1000)
+        beta = (T0-TF)/(M*T0*TF)
+
+        T = T0
+        while T > TF:
+            exitos = 0
+            vecinosgenerados = 0
+            while exitos < maxExitos and maxVecinosGenerados > vecinosgenerados:
+                randNum = randrange(len(self.P)**2-len(self.P))
+
+                j = randNum//len(self.P)
+                i = randNum%len(self.P)
+                vecinosgenerados+=1
+                if j >= i:
+                    j+=1
+                difCost = solVecina.difCoste(i,j)
+                if difCost < 0 or random()<= math.exp(-difCost/T):
+                    solVecina = solVecina.vecino(i,j)
+                    if solVecina.coste() < mejorCoste:
+                        mejorCoste = solVecina.coste()
+                        mejorSol = solVecina.copia()
+            T = T/(1+beta*T)
+        return mejorSol
+
+
+
+
+    def bigMute(self):
+        t = len(self.P)//4
+        newP = self.P[:]
+        indicesCambio = [i for i in range(len(self.P))]
+        shuffle(indicesCambio)
+        indicesCambio = indicesCambio[:t+1]
+        cambiados = []
+        for i in indicesCambio:
+            cambiados.append(newP[i])
+            newP[i] = -1
+
+        i = 0
+        while len(cambiados) > 0:
+            while newP[i] != -1:
+                i+=1
+            newP[i] = cambiados.pop(0)
+
+        return Permutacion(P=newP, D= self.D, F=self.F)

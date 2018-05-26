@@ -1,0 +1,32 @@
+\textbf{Algoritmo ILS-ES}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Caso & MejorCoste & Coste obtenido & Desviación & tiempo \\
+			\hline \hline
+			chr22a & 6156 & 6456 & 4.87 & 5.32\\ \hline
+			chr22b & 6194 & 6742 & 8.84 & 5.23\\ \hline
+			chr25a & 3796 & 5238 & 37.98 & 5.84\\ \hline
+			esc128 & 64 & 98 & 53.12 & 59.34\\ \hline
+			had20 & 6922 & 6922 & 0.0 & 4.44\\ \hline
+			lipa60b & 2520135 & 3043180 & 20.75 & 19.21\\ \hline
+			lipa80b & 7763962 & 9547423 & 22.97 & 26.83\\ \hline
+			nug28 & 5166 & 5264 & 1.89 & 7.14\\ \hline
+			sko81 & 90998 & 94486 & 3.83 & 28.52\\ \hline
+			sko90 & 115534 & 120792 & 4.55 & 34.67\\ \hline
+			sko100a & 152002 & 161208 & 6.05 & 32.19\\ \hline
+			sko100f & 149036 & 157370 & 5.59 & 32.24\\ \hline
+			tai100a & 21052466 & 22370186 & 6.25 & 33.07\\ \hline
+			tai100b & 1185996137 & 1273972590 & 7.41 & 34.25\\ \hline
+			tai150b & 498896643 & 544843315 & 9.2 & 75.7\\ \hline
+			tai256c & 44759294 & 49180730 & 9.87 & 137.33\\ \hline
+			tho40 & 240516 & 251164 & 4.42 & 10.65\\ \hline
+			tho150 & 8133398 & 8707874 & 7.06 & 73.11\\ \hline
+			wil50 & 48816 & 49952 & 2.32 & 13.92\\ \hline
+			wil100 & 273038 & 280364 & 2.68 & 34.88\\ \hline
+			\end{tabular}
+		\caption{Datos obtenidos para el algoritmo ILS-ES}
+		\label{tabla:DatosILS-ES}
+	\end{center}
+\end{table}

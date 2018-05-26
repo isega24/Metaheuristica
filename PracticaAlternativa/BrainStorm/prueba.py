@@ -10,15 +10,15 @@ from solution import *
 
 
 dimension = 2
-nIdeas = 20
+nIdeas = 50
 
 nClusters = 5
 random.seed(None)
 #bench = Benchmark()
 def coste(array):
-    cost = 0
+    cost = 10*len(array)
     for i in array:
-        cost+=i**2
+        cost+=i**2-10*math.cos(2*math.pi*i)
     return cost
 
 
@@ -32,27 +32,32 @@ for i in range(nEval):
     # Copiamos las ideas en el orden en el que estan
     newIdeas = [idea.copia() for idea in ideas]
     clusters = clustering(newIdeas)
-    if i%10==0:
+    if i%1==0:
         j=0
+
         print("Generacion " + str(i))
+        t = 0
         for m in clusters:
-            print("Cluster "+str(j))
-            j+=1
+            t+=1
+            printFile = "cluster"+str(t)+"Gen"+str(i)+".cl"
+            with open("./generacionesPruebas/"+printFile,'w') as f:
+                j+=1
 
-            for k in m.ideas:
+                for k in m.ideas:
+                    string = ""
+                    for v in k.array:
+                        string += str(v)+"\t"
+
+                    f.write(string+"\n")
+
+        printFile = "representantesGen"+str(i)+".cl"
+        with open("./generacionesPruebas/"+printFile,'w') as f:
+            for m in clusters:
                 string = ""
-                for v in k.array:
-                    string += str(v)+"\t"
-
-                print(string)
-
-        for m in clusters:
-            print("Mejor representante:")
-            string = ""
-            represent = m.clusterRepresent()
-            for j in represent.array:
-                string += str(j) + "\t"
-            print(string)
+                represent = m.clusterRepresent()
+                for j in represent.array:
+                    string += str(j) + "\t"
+                f.write(string+"\n")
 
     # Generamos los clusters a partir de las ideas de esta fase.
     modify = False
@@ -129,6 +134,9 @@ for i in range(nEval):
                 if idea1Selected.coste() < ideas[idea1Selected.getId()].coste():
                     ideas[idea1Selected.id].cambia(idea1Selected)
                     modify = True
+    if i % 10==0:
+        print(i)
+        print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
 
 
 

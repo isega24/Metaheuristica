@@ -1,3 +1,4 @@
+\textbf{Algoritmo Genetico1OPX}
 \begin{table}[htbp]
 	\begin{center}
 		\begin{tabular}{|l|l|l|l|l|}
@@ -25,7 +26,7 @@
 			wil50 & 48816 & 50092 & 2.61 & 13.54\\ \hline
 			wil100 & 273038 & 288504 & 5.66 & 21.87\\ \hline
 			\end{tabular}
-		\caption{Datos obtenidos para el algoritmo Genetico1PMX}
+		\caption{Datos obtenidos para el algoritmo Genetico1OPX}
 		\label{tabla:DatosGenetico1OPX}
 	\end{center}
 \end{table}

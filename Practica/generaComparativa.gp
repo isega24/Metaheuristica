@@ -1,3 +1,4 @@
+
 #!/bin/usr/gnuplot
 set xlabel "Generaciones"
 set ylabel "Coste"

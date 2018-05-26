@@ -1,3 +1,4 @@
+\textbf{Algoritmo Genetico2OPXM2}
 \begin{table}[htbp]
 	\begin{center}
 		\begin{tabular}{|l|l|l|l|l|}
@@ -25,7 +26,7 @@
 			wil50 & 48816 & 50992 & 4.45 & 10.89\\ \hline
 			wil100 & 273038 & 288598 & 5.69 & 22.84\\ \hline
 			\end{tabular}
-		\caption{Datos obtenidos para el algoritmo Genetico2PMXM2}
+		\caption{Datos obtenidos para el algoritmo Genetico2OPXM2}
 		\label{tabla:DatosGenetico2OPXM2}
 	\end{center}
 \end{table}
