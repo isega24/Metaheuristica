@@ -10,10 +10,11 @@ from solution import *
 
 
 dimension = 2
-nIdeas = 50
+nIdeas = 100
 
 nClusters = 5
 random.seed(None)
+np.random.seed(None)
 #bench = Benchmark()
 def coste(array):
     cost = 10*len(array)
@@ -27,11 +28,11 @@ sup = 100.0 #bench.getLimSup()
 
 ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
 # Primeras ideas creadas. Ahora el algoritmo...
-nEval = 1000
+nEval = 2000
 for i in range(nEval):
     # Copiamos las ideas en el orden en el que estan
     newIdeas = [idea.copia() for idea in ideas]
-    clusters = clustering(newIdeas)
+    clusters = clustering(newIdeas,clust=nClusters)
     if i%1==0:
         j=0
 

@@ -9,18 +9,18 @@ import random
 from solution import *
 
 
-if len(sys.argv) < 6:
-    print("Use: ./main.py <problem id> <dimension> <n_ideas> <seed> <output file>")
+if len(sys.argv) < 5:
+    print("Use: ./main.py <problem id> <dimension> <n_ideas> <seed>")
     sys.exit()
 idProblem = int(sys.argv[1])
 dimension = int(sys.argv[2])
 nIdeas = int(sys.argv[3])
 seed = int(sys.argv[4])
-outFile = sys.argv[5]
 nClusters = 5
-random.seed(None)
+random.seed(seed)
 bench = Benchmark()
 coste = bench.getFuncion(idProblem)
+np.random.seed(seed)
 
 
 inf = bench.getLimInf()
@@ -37,7 +37,7 @@ for i in range(nEval):
     modify = False
     clusters = clustering(newIdeas)
     Fails = 0
-    while not modify and Fails < 2000:
+    while not modify and Fails < 200:
         #if i %5 == 0:
         Fails+=1
         # Vemos si tenemos que mutar algun representande de cluster.
@@ -109,13 +109,23 @@ for i in range(nEval):
                     ideas[idea1Selected.id].cambia(idea1Selected)
                     modify = True
 
-    if i % 1==0:
+    if i % 50==0:
         print(i)
         print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
 
 
 
-
+with open("./solucionesDimension"+str(dimension)+"/funcion"+str(idProblem)+".sol",'w') as f:
+    mejorIdea = ideas[0]
+    for idea in ideas:
+        if idea.coste()< mejorIdea.coste():
+            mejorIdea = idea
+    string = ""
+    for i in mejorIdea.array:
+        string+=str(i)+"\t"
+    string+="\n"
+    f.write("MejorCoste:\t"+str(mejorIdea.coste())+"\n")
+    f.write(string)
 
 
 
