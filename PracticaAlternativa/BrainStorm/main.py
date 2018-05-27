@@ -3,6 +3,7 @@
 import sys
 import numpy as np
 from benchmark import Benchmark
+from cec2014 import cec14
 import math
 import random
 
@@ -19,7 +20,8 @@ seed = int(sys.argv[4])
 nClusters = 5
 random.seed(seed)
 bench = Benchmark()
-coste = bench.getFuncion(idProblem)
+def coste(array):
+    return cec14(array,idProblem+1)
 np.random.seed(seed)
 
 
@@ -109,13 +111,13 @@ for i in range(nEval):
                     ideas[idea1Selected.id].cambia(idea1Selected)
                     modify = True
 
-    if i % 50==0:
+    if i % 1==0:
         print(i)
         print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
 
 
 
-with open("./solucionesDimension"+str(dimension)+"/funcion"+str(idProblem)+".sol",'w') as f:
+with open("./solucionesDimension"+str(dimension)+"/funcion"+str(idProblem+1)+".sol",'w') as f:
     mejorIdea = ideas[0]
     for idea in ideas:
         if idea.coste()< mejorIdea.coste():
