@@ -114,14 +114,13 @@ for m in range(25):
 
 
     if mejorSol == None:
-        mejorSol,l = Permutacion(solucion,matrizDistancias,matrizFlujos).busquedaLocal(50000)
+        mejorSol,l = Permutacion(solucion,matrizDistancias,matrizFlujos).busquedaLocal(50000//25)
         mejorCoste = mejorSol.coste()
     else:
-        unaSol,l = Permutacion(solucion,matrizDistancias,matrizFlujos).busquedaLocal(50000)
+        unaSol,l = Permutacion(solucion,matrizDistancias,matrizFlujos).busquedaLocal(50000//25)
         if unaSol.coste() < mejorCoste:
             mejorSol = unaSol
             mejorCoste = mejorSol.coste()
-    print("Iteracion "+str(m))
 
 tiempo_final = time()
 

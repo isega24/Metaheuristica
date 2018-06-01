@@ -40,7 +40,7 @@ for i in range(25):
     soluciones.append(Permutacion.randPerm(D=matrizDistancias,F=matrizFlujos))
 mejorSol = None
 for sol in soluciones:
-    sol,j = sol.busquedaLocal(50000)
+    sol,j = sol.busquedaLocal(50000//25)
 
     if mejorSol == None:
         mejorSol = sol

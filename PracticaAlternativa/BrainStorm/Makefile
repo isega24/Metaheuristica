@@ -20,4 +20,4 @@ build:
 	./main.py $@ 10 100 0 $(OUT)/problema$@Dimension10.txt
 
 all:
-	./recogerDatos.sh 
+	./recogerDatos.sh

@@ -18,7 +18,7 @@ dimension = int(sys.argv[2])
 nIdeas = int(sys.argv[3])
 seed = int(sys.argv[4])
 nClusters = 5
-random.seed(seed)
+random.seed(None)
 bench = Benchmark()
 def coste(array):
     return cec14(array,idProblem+1)
@@ -30,22 +30,34 @@ sup = bench.getLimSup()
 
 ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
 # Primeras ideas creadas. Ahora el algoritmo...
-nEval = 2000
-for i in range(nEval):
+maxEvalCostFunc = 10000*dimension
+nEvalCostFunc = 0
+i = -1
+while nEvalCostFunc < maxEvalCostFunc:
+    i+=1
     # Copiamos las ideas en el orden en el que estan
     newIdeas = [idea.copia() for idea in ideas]
 
     # Generamos los clusters a partir de las ideas de esta fase.
     modify = False
-    clusters = clustering(newIdeas)
-    Fails = 0
-    while not modify and Fails < 200:
+    if i %1 == 0:
+        clusters = clustering(newIdeas)
+    while not modify and nEvalCostFunc < maxEvalCostFunc:
+        nEvalCostFunc+=1
         #if i %5 == 0:
-        Fails+=1
         # Vemos si tenemos que mutar algun representande de cluster.
         muteProb = random.random()
         if muteProb < 0.2:
-            clusterToModif = random.randrange(len(clusters))
+            clusterSelection = random.randrange(len(newIdeas))
+            ideal = 0
+            clusterS = 0
+            while ideal < clusterSelection:
+                ideal += len(clusters[clusterS].ideas)
+                clusterS+=1
+
+            clusterS-=1
+            clusterS = max(0,clusterS)
+            clusterToModif = clusterS
             represent = clusters[clusterToModif].clusterRepresent()
             represent.cambia(Idea.randIdea(represent.costFunc,represent.getId(),dimension,inf,sup))
             if clusters[clusterToModif].clusterRepresent().coste() < ideas[clusters[clusterToModif].clusterRepresent().id].coste():
@@ -61,18 +73,28 @@ for i in range(nEval):
             ###########################################################
             # Ahora no lo estamos haciendo.
 
-            selectedCluster = random.choice(clusters)
+            clusterSelection = random.randrange(len(newIdeas))
+            ideal = 0
+            clusterS = 0
+            while ideal < clusterSelection:
+                ideal += len(clusters[clusterS].ideas)
+                clusterS+=1
+
+            clusterS-=1
+            clusterS = max(0,clusterS)
+            selectedCluster = clusters[clusterS]
+
             clusterSelection = random.random()
             if clusterSelection < 0.4:
                 represent = selectedCluster.clusterRepresent()
-                represent.cambia(selectedCluster.clusterRepresent().muta(i,nEval))
+                represent.cambia(selectedCluster.clusterRepresent().muta(nEvalCostFunc,maxEvalCostFunc))
                 if selectedCluster.clusterRepresent().coste() < ideas[selectedCluster.clusterRepresent().id].coste():
                     ideas[selectedCluster.clusterRepresent().id].cambia(selectedCluster.clusterRepresent())
                     modify = True
 
             else:
                 ideaSelected = random.choice(selectedCluster.ideas)
-                ideaSelected.cambia(ideaSelected.muta(i,nEval))
+                ideaSelected.cambia(ideaSelected.muta(nEvalCostFunc,maxEvalCostFunc))
                 if ideaSelected.coste() < ideas[ideaSelected.id].coste():
                     ideas[ideaSelected.id].cambia(ideaSelected)
                     modify = True
@@ -111,9 +133,10 @@ for i in range(nEval):
                     ideas[idea1Selected.id].cambia(idea1Selected)
                     modify = True
 
-    if i % 1==0:
+    if i % 10==0:
         print(i)
-        print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
+        print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])-100*idProblem ))
+        print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
 
 
 
