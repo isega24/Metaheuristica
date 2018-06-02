@@ -23,6 +23,8 @@ bench = Benchmark()
 def coste(array):
     return cec14(array,idProblem+1)
 np.random.seed(seed)
+outFile = "./solucionesDimension"+str(dimension)+"/funcion"+str(idProblem)+".sol"
+print(outFile)
 
 
 inf = bench.getLimInf()
@@ -133,14 +135,14 @@ while nEvalCostFunc < maxEvalCostFunc:
                     ideas[idea1Selected.id].cambia(idea1Selected)
                     modify = True
 
-    if i % 10==0:
+    if i % 20==0:
         print(i)
         print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])-100*idProblem ))
         print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
 
 
 
-with open("./solucionesDimension"+str(dimension)+"/funcion"+str(idProblem+1)+".sol",'w') as f:
+with open(outFile,'w') as f:
     mejorIdea = ideas[0]
     for idea in ideas:
         if idea.coste()< mejorIdea.coste():
