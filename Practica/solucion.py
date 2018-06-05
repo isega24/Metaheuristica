@@ -154,20 +154,21 @@ class Permutacion:
         beta = (T0-TF)/(M*T0*TF)
 
         T = T0
-        while T > TF:
-            exitos = 0
+        exitos = 1
+        while T > TF and exitos > 0:
             vecinosgenerados = 0
+            exitos = 0
             while exitos < maxExitos and maxVecinosGenerados > vecinosgenerados:
                 randNum = randrange(len(self.P)**2-len(self.P))
-
+                vecinosgenerados+=1
                 j = randNum//len(self.P)
                 i = randNum%len(self.P)
-                vecinosgenerados+=1
                 if j >= i:
                     j+=1
                 difCost = solVecina.difCoste(i,j)
                 if difCost < 0 or random()<= math.exp(-difCost/T):
                     solVecina = solVecina.vecino(i,j)
+                    exitos+=1
                     if solVecina.coste() < mejorCoste:
                         mejorCoste = solVecina.coste()
                         mejorSol = solVecina.copia()

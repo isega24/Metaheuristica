@@ -84,11 +84,46 @@ Esta práctica consistirá en desarrollar cuatro algoritmos basado en trayectori
 
 \subsubsection{Búsqueda multiarranque básico.}
 
-Este algorítmo consiste en utilizar la ya conocida búsqueda local a partir de varios puntos o soluciones de arranque. Puesto que  condición de parada son las mismas evaluaciones, se realizarán menos evaluaciones en cada una de las búsquedas locales del algoritmo.
+Este algorítmo consiste en utilizar la ya conocida búsqueda local a partir de varios puntos o soluciones de arranque. Puesto que  condición de parada son las mismas evaluaciones, se realizarán menos evaluaciones en cada una de las búsquedas locales del algoritmo. 
 
 \subsubsection{Enfriamiento simulado(ES).}
 
-Este algoritmo se basa en cómo  se comportan una partícula dentro de un metal al enfriarse el mismo. Al principio, esta partícula tiene mucha energía por la alta temperatura, por lo que se mueve mucho aunque vaya a posiciones con más "energía". Conforme se va enfriando el metal, lo mismo le pasa a la partícula y tiene menos energía, por lo que los saltos que hace se empiezan a parecer más a una búsqueda por descenso, intentando ir a posiciones con cada vez menos energía. 
+Este algoritmo se basa en cómo  se comportan una partícula dentro de un metal al enfriarse el mismo. Al principio, esta partícula tiene mucha energía por la alta temperatura, por lo que se mueve mucho aunque vaya a posiciones con más "energía". Conforme se va enfriando el metal, lo mismo le pasa a la partícula y tiene menos energía, por lo que los saltos que hace se empiezan a parecer más a una búsqueda por descenso, intentando ir a posiciones con cada vez menos energía. Pasamos a describir cada una de las características:
+
+\begin{itemize}
+	\item \textbf{Aceptación de soluciones.} Este algoritmo se basa en poder aceptar soluciones de peor calidad dependiendo de la temeratura actual. Así, una solución será aceptada cuando:\\
+	
+	\begin{itemize}
+		\item La solución S' es mejor que la solución S actual con una probabilidad de 1.
+		\item La solución S' es peor que la solución S actual con una probabilidad de $ e^{\dfrac{-dC}{T_i}}$, donde $dC$ es la diferencia de coste entre la solución actual S y S'. $dC$ es un número positivo ya que S' no mejora a la solución actual. $T_i$ es la temperatura actual. Por tanto, la expresión antes descrita es un número entre 0 y 1 que podremos usar como probabilidad. Además se pueden hacer varias observaciones.\\
+		
+		La primera es que si la temperatura es muy alta la probabilidad con la que vamos a aceptar una solución es prácticamente 1. Si es muy baja, es casi 0. \\
+		
+		La segunda, que conforme va avanzando el algoritmo, $dC$ empieza a tener más importancia. Tanto cuando la temperatura es muy alta como cuando es muy baja, $dC$ no afecta demasiado a la aceptación de la solución. Sin embargo, en mitad de la ejecución si es más relevante. Se aceptarán soluciones dependiendo de cuanta diferencia de coste hay entre soluciones.
+	
+	\end{itemize}
+	\item \textbf{Esquema de enfriamiento.} En cada etapa del algoritmo modificaremos la temperatura de la siguiente manera:
+	
+	\[T_{k+1}=\dfrac{T_k}{1+\beta T_{k}},\beta = \dfrac{T_0-T_f}{MT_0T_f} \]
+	 
+	 Donde M es el número de enfriamientos. Este es distinto a número de evaluaciones de la función objetivo. Se harán, dentro de una misma etapa de enfriamiento, varias evaluaciones de la función objetivo.
+	 
+	 \item \textbf{Operador de vecino.} Se utiliza el mismo operador de vecino que en la búsqueda local de la primera práctica. En cada iteración se explorará sólo un vecino que pueda sustituir a la solución actual.
+	 
+	 \item \textbf{Condición de enfriamiento.} La condición que se quiere considerar en la práctica para enfriar es haber alcanzado un máximo de evaluaciones de nuevos vecinos o haber alcanzado un máximo de vecinos aceptados.
+	 
+	 \item \textbf{Condición de parada.} El algoritmo finalizará si se llega al máximo de evaluaciones o si en la iteración actual no ha encontrado ninguna solución que hayamos aceptado. Esta última consideración se impone en la práctica pero veremos que pasa si la suprimimos.
+	
+	
+\end{itemize}
+
+Los valores de los parámetros escogidos en esta práctica son los siguientes:\\
+
+\[T_0=\dfrac{\mu C(S_0)}{-ln(\phi)},T_f=10^{-3},\mu=\phi=0.3\]
+
+Se debe comprobar que la temperatura final es menor que la inicial. Como número máximo de vecinos en cada enfriamiento se ha escogido 10 veces el tamaño del problema. Como número de éxitos, la décima parte de este número. Así, el número de enfriamientos será $50000/max\_vecinos$.
+
+
 
 \subsubsection{Búsqueda local iterativa(ILS).}
 
@@ -200,11 +235,6 @@ La forma de utilizar el programa es la siguiente:\\
 	
 	Es importante mencionar que dentro de la ejecución de los programas se les ha introducido una semilla en concreto, $200000$, que no modificaremos.\\
 	
-	Todos los resultados nos los encontramos en las carpeta $./solutionAlgoritmo/$ con el mismo nombre del archivo de datos pero con terminación ".sol". Se han generado también tablas en Latex e imágenes que nos ayudarán en el estudio de los algoritmos. Para la obtención de gráficos se han creado tres scripts los cuales se ejecutan de la siguiente manera:\\
-	
-	$./AllGraphics.sh$\\
-	$./graficosComparativa.sh$\\
-	$./graficosComparativaGeneracionales.sh$\\
 	
 \end{itemize}
 
@@ -241,15 +271,13 @@ Por último, la tabla de comparación de algoritmos:
 			\hline
 			Algoritmo &  Desv & Tiempo\\
 			\hline \hline
-			Greedy& 71.75 & 0,00\\ \hline
-			BL& 8.64& 11.08\\ \hline
-			Genetico1 & 24.98 & 15.9\\ \hline
-			Genetico1PMX & 20.98& 19.05\\ \hline
-			Genetico2 & 18.06 & 71.62\\ \hline
-			Genetico2PMX & 10.93 & 70.61\\ \hline
-			Genetico2PMX Mejora 1 & 26.72 & 20.59\\ \hline
-			Genetico2PMX Mejora 2 & 18.59 & 20.64\\ \hline
-			Genetico2PMX Mejora 3 & 18.44 & 18.93\\ \hline
+			Greedy& 59.73 & 0,00\\ \hline
+			BL & 8.34 & 13.45 \\ \hline
+			BMB & 24.98 & 15.9\\ \hline
+			ES & 20.98& 19.05\\ \hline
+			ILS & 18.06 & 71.62\\ \hline
+			GRASP & 8.03 & 70.61\\ \hline
+			ILS-ES & 26.72 & 20.59\\ \hline
 		\end{tabular}
 		\caption{Tabla de comparación}
 		\label{tabla:TablaComparacion}
