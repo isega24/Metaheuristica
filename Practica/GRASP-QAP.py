@@ -20,21 +20,26 @@ def ordenSuma(matriz):
     return sorted(orden,key=lambda val: val[1])
 
 def costeAsignacion(D,F,S,r,s):
+    # r es la instalacion
+    # s es la ubicacion
     coste = 0
+    # i es la instalación
     for i in range(len(S)):
         if S[i] != -1:
-            coste+= F[r][i]*D[s][S[i]]+F[i][r]*D[S[i]][r]
+            coste+= F[r][i]*D[s][S[i]]+F[i][r]*D[S[i]][s]
     return coste
 
 def candidatos(D,F,S):
     candidatos = []
-    # i representa una localizacion
-    for i in range(len(D)):
+    S_c = range(len(S))
+    S_c = list(set(S_c)-set(S))
+
+    # i representa una instalación
+    for i in range(len(F)):
         if S[i] == -1:
-            # j representa un establecimiento
-            for j in range(len(F)):
-                if j not in S:
-                    candidatos.append(((j,i),costeAsignacion(D,F,S,i,j)))
+            # j representa una ubicación
+            for j in S_c:
+                candidatos.append(((i,j),costeAsignacion(D,F,S,i,j)))
     return sorted(candidatos,key=lambda val: val[1])
 
 
@@ -110,7 +115,7 @@ for m in range(25):
                 candidats = candidats[0:i]
             i+=1
         shuffle(candidats)
-        solucion[candidats[0][0][1]] = candidats[0][0][0]
+        solucion[candidats[0][0][0]] = candidats[0][0][1]
 
 
     if mejorSol == None:

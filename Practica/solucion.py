@@ -47,6 +47,7 @@ def readSolution(filename):
 class Permutacion:
     def __init__(self,P,D,F, cost=None):
         self.P = P
+        # La permutación asigna la instalación i a la ubicacion P[i]
         self.D = D
         self.F = F
         self.cost = cost

@@ -2,7 +2,7 @@
 
 import sys
 
-casos=["chr22a","chr22b","chr25a","esc128","had20","lipa60b","lipa80b","nug28","sko81","sko90","sko100a","sko100f","tai100a","tai100b","tai150b","tai256c","tho40","tho150","wil50","wil100"]
+casos=["had20","chr22a","chr22b","chr25a","nug28","tho40","wil50","lipa60b","lipa80b","sko81","sko90","sko100a","sko100f","tai100a","tai100b","wil100","esc128","tai150b","tho150","tai256c"]
 
 if len(sys.argv) < 2:
     print("Este script necesita el nombre del algoritmo sobre el que queremos usar la tabla de latex.")

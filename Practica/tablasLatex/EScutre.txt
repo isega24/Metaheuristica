@@ -1,0 +1,33 @@
+\textbf{Algoritmo ES}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|l|}
+			\hline
+			Caso & MejorCoste & Coste obtenido & Desviación & tiempo \\
+			\hline \hline
+			had20 & 6156 & 6862 & 11.46 & 0.12\\ \hline
+			chr22a & 6194 & 7634 & 23.24 & 0.08\\ \hline
+			chr22b & 3796 & 6956 & 83.24 & 0.24\\ \hline
+			chr25a & 64 & 78 & 21.87 & 7.88\\ \hline
+			nug28 & 6922 & 6938 & 0.23 & 0.14\\ \hline
+			tho40 & 2520135 & 3044214 & 20.79 & 1.25\\ \hline
+			wil50 & 7763962 & 9438677 & 21.57 & 4.63\\ \hline
+			lipa60b & 5166 & 5388 & 4.29 & 0.37\\ \hline
+			lipa80b & 90998 & 92866 & 2.05 & 5.83\\ \hline
+			sko81 & 115534 & 117570 & 1.76 & 7.22\\ \hline
+			sko90 & 152002 & 155124 & 2.05 & 12.21\\ \hline
+			sko100a & 149036 & 152106 & 2.05 & 10.04\\ \hline
+			sko100f & 21052466 & 21914850 & 4.09 & 7.55\\ \hline
+			tai100a & 1185996137 & 1252179834 & 5.58 & 14.45\\ \hline
+			tai100b & 498896643 & 513278727 & 2.88 & 36.83\\ \hline
+			wil100 & 44759294 & 45598736 & 1.87 & 19.46\\ \hline
+			esc128 & 240516 & 253326 & 5.32 & 0.68\\ \hline
+			tai150b & 8133398 & 8314986 & 2.23 & 34.21\\ \hline
+			tho150 & 48816 & 49876 & 2.17 & 1.42\\ \hline
+			tai256c & 273038 & 276036 & 1.09 & 14.27\\ \hline
+			\end{tabular}
+		\caption{Datos obtenidos para el algoritmo ES}
+		\label{tabla:DatosES}
+	\end{center}
+\end{table}
+\newpage

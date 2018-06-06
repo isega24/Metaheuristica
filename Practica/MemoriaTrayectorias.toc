@@ -7,16 +7,16 @@
 \contentsline {subsubsection}{\numberline {2.3.1}B\IeC {\'u}squeda multiarranque b\IeC {\'a}sico.}{4}
 \contentsline {subsubsection}{\numberline {2.3.2}Enfriamiento simulado(ES).}{4}
 \contentsline {subsubsection}{\numberline {2.3.3}B\IeC {\'u}squeda local iterativa(ILS).}{6}
-\contentsline {subsubsection}{\numberline {2.3.4}B\IeC {\'u}squeda por procedimiento greedy aleatorizado(GRASP).}{6}
-\contentsline {subsubsection}{\numberline {2.3.5}Algoritmo h\IeC {\'\i }brido. ILS-ES}{6}
-\contentsline {section}{\numberline {3}Pseudoc\IeC {\'o}digos y explicaciones.}{7}
-\contentsline {subsection}{\numberline {3.1}AG generacional.}{7}
-\contentsline {subsection}{\numberline {3.2}AG estacionario.}{7}
-\contentsline {subsection}{\numberline {3.3}Algoritmos mem\IeC {\'e}ticos}{7}
-\contentsline {subsection}{\numberline {3.4}Consideraciones de parada de cada algoritmo.}{9}
-\contentsline {section}{\numberline {4}Algoritmo de comparaci\IeC {\'o}n.}{10}
-\contentsline {section}{\numberline {5}Manual de uso.}{11}
-\contentsline {section}{\numberline {6}Experimento y an\IeC {\'a}lisis de resultados.}{12}
-\contentsline {subsection}{\numberline {6.1}An\IeC {\'a}lisis de resultados}{17}
-\contentsline {subsection}{\numberline {6.2}An\IeC {\'a}lisis de AG generacionales.}{21}
-\contentsline {subsection}{\numberline {6.3}Posibles mejoras de los algoritmos}{24}
+\contentsline {subsubsection}{\numberline {2.3.4}B\IeC {\'u}squeda por procedimiento greedy aleatorizado(GRASP).}{7}
+\contentsline {subsubsection}{\numberline {2.3.5}Algoritmo h\IeC {\'\i }brido. ILS-ES}{7}
+\contentsline {section}{\numberline {3}Pseudoc\IeC {\'o}digos y explicaciones.}{8}
+\contentsline {subsection}{\numberline {3.1}BMB.}{8}
+\contentsline {subsection}{\numberline {3.2}ES.}{8}
+\contentsline {subsection}{\numberline {3.3}ILS.}{10}
+\contentsline {subsection}{\numberline {3.4}GRASP.}{10}
+\contentsline {subsection}{\numberline {3.5}ILS-ES.}{12}
+\contentsline {section}{\numberline {4}Algoritmo de comparaci\IeC {\'o}n.}{13}
+\contentsline {section}{\numberline {5}Manual de uso.}{14}
+\contentsline {section}{\numberline {6}Experimento y an\IeC {\'a}lisis de resultados.}{16}
+\contentsline {subsection}{\numberline {6.1}An\IeC {\'a}lisis de resultados}{22}
+\contentsline {subsection}{\numberline {6.2}Posibles mejoras de los algoritmos}{22}
