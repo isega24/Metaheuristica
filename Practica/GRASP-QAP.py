@@ -6,7 +6,7 @@ from solucion import Permutacion
 from solucion import coste
 from solucion import readData,readSolution
 from time import time
-from random import seed,shuffle,random,randrange
+from random import seed,shuffle,random,randrange,sample
 import numpy
 
 
@@ -17,7 +17,7 @@ def ordenSuma(matriz):
         for j in range(len(matriz)):
             potencial+=matriz[i][j] + matriz[j][i]
         orden.append((i,potencial))
-    return sorted(orden,key=lambda val: val[1])
+    return orden
 
 def costeAsignacion(D,F,S,r,s):
     # r es la instalacion
@@ -40,7 +40,7 @@ def candidatos(D,F,S):
             # j representa una ubicación
             for j in S_c:
                 candidatos.append(((i,j),costeAsignacion(D,F,S,i,j)))
-    return sorted(candidatos,key=lambda val: val[1])
+    return candidatos
 
 
 if len(sys.argv) < 2:
@@ -68,53 +68,60 @@ matrizDistancias = [[int(matrizDistancias[i][j]) for j in range(len(matrizDistan
 
 tiempo_inicial = time()
 # Algoritmo.
+mejorSol = None
+mejorCoste = -1
 for m in range(25):
     # El mayor flujo es el más prometedor, orden inverso
     ordenFlujos = ordenSuma(matrizFlujos)[::-1]
+    maximoF = max([ordenFlujos[i][1] for i in range(len(ordenFlujos))])
+    minimoF = min([ordenFlujos[i][1] for i in range(len(ordenFlujos))])
     # La menor distancia es el más prometedor, orden normal.
     ordenDistancias = ordenSuma(matrizDistancias)
-    umbralFlujos = ordenFlujos[0][1] -0.3*(ordenFlujos[0][1]-ordenFlujos[-1][1])
-    umbralDistancias = ordenDistancias[0][1] + 0.3*(ordenDistancias[-1][1]-ordenDistancias[0][1])
+    maximoD = max([ordenDistancias[i][1] for i in range(len(ordenDistancias))])
+    minimoD = min([ordenDistancias[i][1] for i in range(len(ordenDistancias))])
 
-    umbralSuperado = False
+    umbralFlujos = maximoF -0.3*(maximoF-minimoF)
+    umbralDistancias = minimoD + 0.3*(maximoD-minimoD)
+
     i=0
-    while not umbralSuperado and i < len(ordenFlujos):
-        if ordenFlujos[i][1] < umbralFlujos:
-            umbralSuperado = True
-            ordenFlujos = ordenFlujos[0:min(i+1,len(ordenFlujos))]
+    mejores = []
+    while  i < len(ordenFlujos):
+        if ordenFlujos[i][1] <= umbralFlujos:
+            mejores.append(ordenFlujos[i])
         i+=1
-    umbralSuperado = False
+    ordenFlujos = mejores
     i=0
-    while not umbralSuperado and i < len(ordenDistancias):
-        if ordenDistancias[i][1] > umbralDistancias:
-            umbralSuperado = True
-            ordenDistancias =ordenDistancias[0:min(i+1,len(ordenDistancias))]
+    mejores = []
+    while i < len(ordenDistancias):
+        if ordenDistancias[i][1] >= umbralDistancias:
+            mejores.append(ordenDistancias[i])
         i+=1
+    ordenDistancias = mejores
     # Ya tenemos los primeros candidatos.
     solucion = [-1 for i in matrizFlujos]
 
-    shuffle(ordenFlujos)
-    shuffle(ordenDistancias)
+    ordenFlujos = sample(ordenFlujos,2)
+    ordenDistancias = sample(ordenDistancias,2)
     solucion[ordenFlujos[0][0]] = ordenDistancias[0][0]
     solucion[ordenFlujos[1][0]] = ordenDistancias[1][0]
 
 
     # Primera etapa conseguida.
-    mejorCoste = -1
-    mejorSol = None
+
 
     for i in range(n-2):
         candidats = candidatos(D=matrizDistancias,F=matrizFlujos,S=solucion)
-
-        umbral = candidats[0][1]+0.3*(candidats[-1][1]-candidats[0][1])
-        umbralSuperado = False
+        maximo = max([candidats[i][1] for i in range(len(candidats))])
+        minimo = min([candidats[i][1] for i in range(len(candidats))])
+        umbral = minimo+0.3*(maximo-minimo)
         i=0
-        while not umbralSuperado and i < len(candidats):
-            if candidats[i][1] > umbral:
-                umbralSuperado = True
-                candidats = candidats[0:i]
+        mejores = []
+        while i < len(candidats):
+            if candidats[i][1] >= umbral:
+                mejores.append(candidats[i])
             i+=1
-        shuffle(candidats)
+        candidats = mejores
+        candidats = sample(candidats,1)
         solucion[candidats[0][0][0]] = candidats[0][0][1]
 
 

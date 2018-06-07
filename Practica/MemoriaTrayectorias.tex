@@ -459,27 +459,23 @@ Si observamos las instancias de tamaño n pequeño, el algoritmo de multi arranq
 
 Si comparamos el enfriamiento simulado con la búsqueda local, vemos que no tenemos el mismo patrón. Se obtienen mejores o peores resultados de forma aleatoria. Sin embargo, en media, obtiene peores resultados. Cabe destacar también que tiene menos tiempo de ejecución.\\
 
-En el algoritmo ILS pasa algo parecido a la búsqueda multi arranque básica. En instancias con un tamaño pequeño, la diversificación de las soluciones y la poca profundidad del problema hace que tenga muy buenos resultados, incluso llegando a  conseguir la solución óptima. Sin embargo, en tamaños de solución más grande, la diversidad de soluciones no compensa a las evaluaciones de menos de cada búsqueda local. Aun así, en algunos tamaños grandes se consigue igualar o superar por  poco a la solución de la búsqueda local. \\
+En el algoritmo ILS pasa algo parecido a la búsqueda multi arranque básica. En instancias con un tamaño pequeño, la diversificación de las soluciones y la poca profundidad del problema hace que tenga muy buenos resultados, incluso llegando a  conseguir la solución óptima. Sin embargo, en tamaños de solución más grande, la diversidad de soluciones no compensa a las evaluaciones de menos de cada búsqueda local. Aun así, en algunos tamaños grandes se consigue igualar o superar por  poco a la solución de la búsqueda local. Para mejorar este procedimiento podríamos añadirle evaluaciones a la búsqueda local dentro del ILS y así profundizar más la búsqueda.\\
 
-GRASP\\
+El algoritmo GRASP tiene un contra muy importante: tarda muchísimo más de lo que tarda cualquier otra metaheurística. Dependiendo de para qué queramos el algoritmo, este será inviable. Esto es debido a que la creación de soluciones greedy aleatorizada necesita mucha capacidad de cómputo(ordena en cada paso muchas listas para obtener el menor y el mayor coste y así escoger los que no sobrepasen el umbral). Por lo demás, tiene un comportamiento parecido a los algorítmos multi arranque, mejores en tamaños pequeños por poder profundizar de la misma manera, y peor en tamaños mayores por falta de la misma. \\
 
-ILS-ES\\
+En el algiritmo híbrido ILS-ES tiene el mismo comportamiento multi arranque antes descrito. Puesto que la comparación con la búsqueda local ya se ha comentado, la vamos a comparar con el ILS sin modificación. En tamaños pequeños y por el comportamiento de salto del enfriamiento simulado, suele obtener peores resultados. Sin embargo, conforme el tamaño crece, el enfriamiento simulado le permite salir de óptimos locales dentro de la profundización que se realiza.\\
 
 
 \subsection{Posibles mejoras de los algoritmos}
 
+Durante la realización de la práctica se han comentado algunas deficiencias. Aquí se recogen algunas ideas para optimizarlas:
 
 \begin{itemize}
-	\item Algo
+	\item \textbf{Profundidad de los algoritmos multi arranque.} Hemos pretendido que nuestras metaheurísticas abarcasen una diversidad demasiado grande en algunos de los casos y demasiado exhaustiva en otros. Una idea para mejorar esto será modificar el número de arranques y la profundidad de la misma. Esto es, cuanto más grande sea el tamaño de nuestro problema, menos multi arranques realizaremos y profundizaremos en cada uno de esos arranques.
+	
+	\item El algoritmo Greedy, con su intento de aleatorizar el proceso greedy, no tiene en cuenta que el umbral escogido es, en tamaños de n grande, nada óptimo. Ese umbral debería decrecerse cuanto más grande sea el conjunto de asignaciones.
 	
 \end{itemize}
-
-
-
-
-
-
-
 
 \end{document}
 

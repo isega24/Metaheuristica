@@ -19,4 +19,4 @@
 \contentsline {section}{\numberline {5}Manual de uso.}{14}
 \contentsline {section}{\numberline {6}Experimento y an\IeC {\'a}lisis de resultados.}{16}
 \contentsline {subsection}{\numberline {6.1}An\IeC {\'a}lisis de resultados}{22}
-\contentsline {subsection}{\numberline {6.2}Posibles mejoras de los algoritmos}{22}
+\contentsline {subsection}{\numberline {6.2}Posibles mejoras de los algoritmos}{23}

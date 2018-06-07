@@ -2,6 +2,7 @@
 
 import random
 import numpy as np
+import sklearn
 sup = 100.0
 inf = -100.0
 
@@ -51,8 +52,39 @@ def sigmoid(x):
     else:
         return 1/(1+np.exp(-x))
 
+def clustering(ideas,clust=5):
+    centroides = random.sample([idea.array for idea in ideas],clust)
 
-def clustering(ideas,clust = 5):
+    #Primeros centroides hechos.
+
+    clusters = [[] for  i in centroides]
+
+    for i in range(100):
+        # Primero meto los puntos.
+        clusters = [[] for  i in centroides]
+        for idea in ideas:
+            mejorDist = eucDist(Idea(centroides[0],idea.costFunc,-1),idea)
+            mejor = 0
+            for j in range(len(centroides)):
+                dist = eucDist(Idea(centroides[j],idea.costFunc,-1),idea)
+                if dist < mejorDist:
+                    mejorDist = dist
+                    mejor = j
+            clusters[mejor].append(idea)
+        #Luego creo nuevos centroides.
+        idClust = 0
+        for cluster in clusters:
+            nuevoCentroide = [0 for k in centroides[0]]
+            for j in range(len(cluster)):
+                for l in range(len(cluster[j].array)):
+                    nuevoCentroide[l]+= cluster[j].array[l]
+            nuevoCentroide = [valor/max(1,len(cluster)) for valor in nuevoCentroide]
+            centroides[idClust] = nuevoCentroide
+            idClust+=1
+    return [Cluster(cluster) for cluster in clusters]
+
+
+def clusteringMin(ideas,clust = 5):
     nClusters = len(ideas)
     clusters = [Cluster([idea]) for idea in ideas]
 
@@ -92,9 +124,9 @@ def clusteringCentroid(ideas,clust = 5):
 class Idea:
     """docstring for Idea."""
     def __init__(self, array,costFunc,iden):
-        self.array = array
+        self.array = np.array(array)
         self.costFunc = costFunc
-        self.cost = costFunc(array)
+        self.cost = costFunc(self.array)
         self.id = iden
 
 

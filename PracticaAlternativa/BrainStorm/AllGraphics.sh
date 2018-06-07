@@ -3,7 +3,7 @@
 rm -r ./graficos/
 mkdir ./graficos
 
-for i in `seq 0 1999`; do
+for i in `seq 0 19`; do
     ./grafico.sh $i
 
 done
