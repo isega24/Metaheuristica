@@ -84,35 +84,35 @@ Esta práctica consistirá en desarrollar cuatro algoritmos basado en trayectori
 
 \subsubsection{Búsqueda multiarranque básico.}
 
-Este algorítmo consiste en utilizar la ya conocida búsqueda local a partir de varios puntos o soluciones de arranque. Puesto que  condición de parada son las mismas evaluaciones, se realizarán menos evaluaciones en cada una de las búsquedas locales del algoritmo. 
+Este algorítmo consiste en utilizar la ya conocida búsqueda local a partir de varios puntos o soluciones de arranque. Puesto que la condición de parada son las mismas evaluaciones, se realizarán menos evaluaciones en cada una de las búsquedas locales del algoritmo. 
 
 \subsubsection{Enfriamiento simulado(ES).}
 
-Este algoritmo se basa en cómo  se comportan una partícula dentro de un metal al enfriarse el mismo. Al principio, esta partícula tiene mucha energía por la alta temperatura, por lo que se mueve mucho aunque vaya a posiciones con más "energía". Conforme se va enfriando el metal, lo mismo le pasa a la partícula y tiene menos energía, por lo que los saltos que hace se empiezan a parecer más a una búsqueda por descenso, intentando ir a posiciones con cada vez menos energía. Pasamos a describir cada una de las características:
+Este algoritmo se basa en cómo  se comporta una partícula dentro de un metal al enfriarse. Al principio esta partícula tiene mucha energía por la alta temperatura del material, por lo que se desplaza aunque vaya a posiciones con más "energía". Conforme se va enfriando, la partícula disminuye su energía, por lo que su movimiento empieza a ser forzosamente dirigido hacia posiciones con menos energía. Pasamos a describir cada una de las características:
 
 \begin{itemize}
-	\item \textbf{Aceptación de soluciones.} Este algoritmo se basa en poder aceptar soluciones de peor calidad dependiendo de la temeratura actual. Así, una solución será aceptada cuando:\\
+	\item \textbf{Aceptación de soluciones.} Este algoritmo se basa en poder aceptar soluciones de peor calidad dependiendo de la temperatura actual. Así, una solución será aceptada cuando:\\
 	
 	\begin{itemize}
 		\item La solución S' es mejor que la solución S actual con una probabilidad de 1.
-		\item La solución S' es peor que la solución S actual con una probabilidad de $ e^{\dfrac{-dC}{T_i}}$, donde $dC$ es la diferencia de coste entre la solución actual S y S'. $dC$ es un número positivo ya que S' no mejora a la solución actual. $T_i$ es la temperatura actual. Por tanto, la expresión antes descrita es un número entre 0 y 1 que podremos usar como probabilidad. Además se pueden hacer varias observaciones.\\
+		\item La solución S' es peor que la solución S actual pero con una probabilidad de $ e^{\dfrac{-dC}{T_i}}$ puede llegar a ser aceptada. $dC$ es la diferencia de coste entre la solución actual S y S'. $dC$ es un número positivo ya que S' no mejora a la solución actual. $T_i$ es la temperatura actual. La expresión antes descrita es un número entre 0 y 1 que podremos usar como probabilidad. Además se pueden hacer varias observaciones.\\
 		
-		La primera es que si la temperatura es muy alta la probabilidad con la que vamos a aceptar una solución es prácticamente 1. Si es muy baja, es casi 0. \\
+		La primera es que si la temperatura es muy alta la probabilidad con la que vamos a aceptar una solución es prácticamente 1. Si es muy baja, es casi nula. \\
 		
-		La segunda, que conforme va avanzando el algoritmo, $dC$ empieza a tener más importancia. Tanto cuando la temperatura es muy alta como cuando es muy baja, $dC$ no afecta demasiado a la aceptación de la solución. Sin embargo, en mitad de la ejecución si es más relevante. Se aceptarán soluciones dependiendo de cuanta diferencia de coste hay entre soluciones.
+		La segunda, que conforme va avanzando el algoritmo, $dC$ comienza a ser más relevante. Tanto cuando la temperatura es muy alta como cuando es muy baja, $dC$ no afecta demasiado en la aceptación de la solución. Sin embargo, en el trascurso de la ejecución si es más relevante. Se aceptarán soluciones dependiendo de cuanta diferencia de coste haya entre soluciones actual y vecina generada.
 	
 	\end{itemize}
 	\item \textbf{Esquema de enfriamiento.} En cada etapa del algoritmo modificaremos la temperatura de la siguiente manera:
 	
 	\[T_{k+1}=\dfrac{T_k}{1+\beta T_{k}},\beta = \dfrac{T_0-T_f}{MT_0T_f} \]
 	 
-	 Donde M es el número de enfriamientos. Este es distinto a número de evaluaciones de la función objetivo. Se harán, dentro de una misma etapa de enfriamiento, varias evaluaciones de la función objetivo.
+	 Donde $M$ es el número de enfriamientos. Este $M$ es distinto al número máximo de evaluaciones de la función objetivo. Se harán, dentro de una misma etapa de enfriamiento, varias evaluaciones de la función objetivo.
 	 
 	 \item \textbf{Operador de vecino.} Se utiliza el mismo operador de vecino que en la búsqueda local de la primera práctica. En cada iteración se explorará sólo un vecino que pueda sustituir a la solución actual.
 	 
-	 \item \textbf{Condición de enfriamiento.} La condición que se quiere considerar en la práctica para enfriar es haber alcanzado un máximo de evaluaciones de nuevos vecinos o haber alcanzado un máximo de vecinos aceptados.
+	 \item \textbf{Condición de enfriamiento.} La condición que se considera en la práctica para enfriar es haber alcanzado un máximo de evaluaciones de nuevos vecinos o haber alcanzado un máximo de vecinos aceptados.
 	 
-	 \item \textbf{Condición de parada.} El algoritmo finalizará si se llega al máximo de evaluaciones o si en la iteración actual no ha encontrado ninguna solución que hayamos aceptado. Esta última consideración se impone en la práctica pero veremos que pasa si la suprimimos.
+	 \item \textbf{Condición de parada.} El algoritmo finalizará si se llega al máximo de evaluaciones o si, en la iteración actual, no ha encontrado ninguna solución que hayamos aceptado.
 	
 	
 \end{itemize}
@@ -127,41 +127,41 @@ Se debe comprobar que la temperatura final es menor que la inicial. Como número
 
 \subsubsection{Búsqueda local iterativa(ILS).}
 
-En este algoritmo ejecutaremos de forma repetida una búsqueda local. Cada cierto tiempo, modificaremos una parte significativa de la solución generando una solución vecina más lejana a la vecina de la búsqueda local, y volveremos a aplicar sobre esta nueva solución la búsqueda local. \\
+En este algoritmo ejecutaremos de forma repetida una búsqueda local. Cada ciertas evaluaciones, modificaremos una parte significativa de la solución, generando una solución vecina más lejana a la vecina de la búsqueda local, y volveremos a aplicar sobre esta nueva solución la búsqueda local. \\
 
-La necesidad de encontrar un vecino más alejado es porque en la búsqueda local ya utilizamos un vecino para descender. Si modificásemos la solución sólo en una trasposición, la búsqueda local nos dará la misma solución. Por ello, en la práctica se nos da la siguiente solución:\\
+La necesidad de encontrar un vecino más alejado es porque en la búsqueda local ya utilizamos un vecino para descender. Si modificásemos la solución sólo en una trasposición, la búsqueda local nos dará la misma solución. En la práctica se nos da la siguiente mutación:\\
 
 \begin{itemize}
-	\item \textbf{Mutación por sublista.} Por este operador, escogeremos una posición aleatoria $i$ y mezclaremos todos los elementos entre $i$ y $i+t$, siendo t el tamalo de la sublista que  iremos a mezclar. En caso de que la lista sea menor que $i+t$, mezclaremos también los índices que falten del principio de la lista. Para mezclar esta lista, utilizaremos el operador $shuffle$ de la librería $random$ de $python$.
+	\item \textbf{Mutación por sublista.} En este operador escogeremos una posición aleatoria $i$ y mezclaremos todos los elementos entre $i$ y $i+t$, siendo $t$ el tamaño de la sublista que  iremos a mezclar. En caso de que la lista sea menor que $i+t$, mezclaremos también los índices que falten del principio de la lista. Para mezclar esta lista, utilizaremos el operador $shuffle$ de la librería $random$ de $python$.
 	
-	\item \textbf{Mutación por $t$ índices distintos.} En la práctica hemos modificado este operador por el de modificar $t$ índices distintos, sin tener estos que estar contiguos. Esto lo hacemos porque en el QAP la relación entre dos posiciones cualquiera es la misma que la de dos posiciones contiguas. Nuestra forma de generar soluciones lejanas estaría sesgada en tal caso.
+	\item \textbf{Mutación por $t$ índices distintos.} En la práctica hemos modificado el operador anterior por el de modificar $t$ índices distintos, sin tener estos que estar contiguos. Esto lo hacemos porque en el QAP la relación entre dos posiciones cualquiera es la misma que la de dos posiciones contiguas. Nuestra forma de generar soluciones lejanas estaría sesgada si sólo considerásemos posiciones contiguas.
 \end{itemize}
 
-El tamaño de sublista en nuestro caso entonces será de $t=n/4$, siendo n el tamaño del problema. Aplicaremos el método ILS a 25 soluciones, la primera vez a una solución aleatoria y las siguientes 24 a soluciones mutadas. Mutaremos siempre la mejor solución encontrada.
+El tamaño de sublista en nuestro caso será de $t=n/4$, siendo n el tamaño del problema. Aplicaremos el método ILS a 25 soluciones, la primera vez a una solución aleatoria y las siguientes 24 a soluciones mutadas. Mutaremos siempre la mejor solución encontrada.
 
 \subsubsection{Búsqueda por procedimiento greedy aleatorizado(GRASP).}
 
-Este algoritmo se basa en crear soluciones greedy aleatoria y aplicarle la búsqueda local a esta. La solución greedy general es determinista en el sentido de que en cada paso de la creación de la solución, incrusta en la solución el mejor valor. En GRASP, se mete uno de los mejores de forma aleatoria. Así nos aseguramos tener soluciones parcialmente buenas y distintas unas de otras para poder escoger soluciones más diversas sobre las que partir y aplicar la búsqueda local.\\
+Este algoritmo se basa en crear soluciones greedy aleatoria y aplicarle la búsqueda local a esta. La solución greedy general es determinista en el sentido de que en cada paso de la creación de la solución, incrusta en la solución la mejor opción. En GRASP, se mete uno de los mejores de forma aleatoria. Así nos aseguramos tener soluciones parcialmente buenas y distintas unas de otras para poder escoger soluciones más diversas sobre las que partir y aplicar la búsqueda local.\\
 
 A continuación se describe la forma de crear soluciones greedy aleatorias iniciales:
 
 \begin{itemize}
 	\item \textbf{Primeras dos ciudades.} A nuestra solución todavía por construir comenzamos metiendo, de forma aleatoria, dos de los elementos con mejor puntuación greedy. Esto significa que ordenamos las localizaciones por mejor valor considerado en el algoritmo greedy. Seleccionamos las mejores y, de esas, escogemos dos.
 	
-	\item \textbf{Siguientes ciudades.} Para las siguientes, se ordenan por el coste relativo de insertar en una localización una instalación concreta. Esto es, cuanto coste añade esta asignación con respecto a las instalaciones ya asignadas:\\
+	\item \textbf{Siguientes ciudades.} Para las siguientes, se ordenan por el coste relativo de insertar en una localización no utilizada una instalación no ubicada concreta. Esto es, cuanto coste añade esta asignación con respecto a las instalaciones ya asignadas:\\
 	
 	\[C_{rel}(r,s)=\sum_{i \in S_p}f_{r,i}d_{s,S_p(i)}+f_{i,r}d_{S_p(i),s} \]
 	
 	Se sigue el mismo criterio para seleccionar a las mejores y, de estas, se escoge una asignación aleatoria y se aplica a la solución parcial $S_p$.
 \end{itemize}
 
-Las mejores asignaciones a las que nos referimos en la creación de la solución parcial son las que añadan como mucho una cantidad un 30\% peor que la mejor de todas las anteriores. 
+Las mejores asignaciones a las que nos referimos en la creación de la solución parcial son las que añadan, como mucho, una cantidad un 30\% peor que la mejor de todas las anteriores. Se detalla más adelante este criterio.
 
 
 
 \subsubsection{Algoritmo híbrido. ILS-ES}
 
-Esta hibridación utiliza el mismo método de ILS pero con la diferencia de que utiliza el enfriamiento simulado en vez de la búsqueda local. Utilizaremos la misma estructura que en los dos algoritmos por separado con la diferencia de que en el enfriamiento simulado habrá menos pasos de enfriamiento, ya que tendrán menos pasos en cada iteración.
+Esta hibridación utiliza el mismo método que ILS pero con la diferencia de que utiliza el enfriamiento simulado en vez de la búsqueda local para profundizar en el entorno de las soluciones. Utilizaremos la misma estructura que en los dos algoritmos por separado con la diferencia de que en el enfriamiento simulado habrá menos pasos en cada enfriamiento, ya que tendrán menos pasos en cada iteración.
 
 \newpage
 \section{Pseudocódigos y explicaciones.}
@@ -249,7 +249,7 @@ Devolvemos S'
 
 Este algoritmo tiene varias funciones auxiliares que ayudan a determinar cómo construir la solución greedy aleatorizada. Las funciones a explicar son las siguientes:\\
 
-\textbf{Función $OrdenSuma$}. Ordena las diagonales de una matriz por cuanto vale la suma de su columna y su fila. Devuelve un vector con los índices ya ordenados junto con su coste. Utilizamos la función $sort$ de python para este último propósito. 
+\textbf{Función $OrdenSuma$}. Puntua las diagonales de una matriz con respecto a cuanto vale la suma de su fila y su columna. Devuelve la lista de índices y sus valores calculados.
 
 \noindent\hrulefill
 
@@ -263,7 +263,7 @@ Para i de 0 hasta N
     sumaI = sumaI + M[j][i](elemento de la columna)
   L <- (i,sumaI)
 
-Devolvemos la lista ordenada por el valor de sumaI.
+Devolvemos L
 \end{lstlisting}
 
 \noindent\hrulefill
@@ -285,7 +285,7 @@ Devolvemos coste
 \noindent\hrulefill
 
 
-La tercera función se encarga de ordenar las posibles inserciones de una instalación  no ubicada en $S_Pp$ en una ubicación no utilizada por $S_p$ ordenadas por el coste de la segunda función auxiliar.
+La tercera función se encarga de puntuar las posibles inserciones de una instalación  no ubicada en $S_Pp$ en una ubicación no utilizada por $S_p$.
 
 \noindent\hrulefill
 
@@ -297,7 +297,7 @@ Para cada instalacion i no asignada
     Aniadimos a L1 la asignacion de la instalacion i en la localizacion j
     junto con su coste
     
-Devolvemos la lista L1 por los valores antes calculados.
+Devolvemos la lista L1
 \end{lstlisting}
 
 
@@ -310,19 +310,18 @@ El pseudocódigo del algoritmo de una iteración del algoritmo GRASP se detalla 
 Solucion vacia S.
 Obtenemos los valores ordenados de las diagonales de la matriz F,Fl
 Obtenemos los valores ordenados de las diagonales de la matriz D,Dl
-Invertimos Dl(Ya que queremos distancias cortas para flujos grandes)
+
 Calculamos el umbral de mejores uM y peores uP de cada lista.
 Nos quedamos en Dl con los indices cuyo valor no sobrepase
   uM+0.3(uP-uM)
 Nos quedamos en Fl con los indices cuyo valor no rebaje
   uM-0,3*(uM-uP)
 
-Escogemos aleatoriamente dos elementos de cada lista, f1, f2, d1, d2
+Escogemos aleatoriamente dos elementos de cada lista, (f1, f2), (d1, d2)
 Aniadimos a la solucion las asignaciones (f1,d1), (f2,d2)
 
 Para el resto de posibles asignaciones:
-  cand es la lista de asignaciones ordenadas calculada para la 
-    solucion parcial S.
+  cand es la lista de asignaciones calculada para la solucion parcial S.
   Calculamos los umbrales uM, uP para S
   Nos quedamos en cand las asignaciones cuyo valor 
     no sobrepase uM+0.3*(uM-uP)
@@ -453,15 +452,15 @@ Por último, la tabla de comparación de algoritmos:
 
 \subsection{Análisis de resultados}
 
-Analizando los estadísticos observamos que ninguno de ellos supera a la búsqueda local en el estadístico Desv. Puesto que algunas de estas metaheurísticas  utilizan por debajo una búsqueda local se nos plantea si realmente son buenas estas nuevas formas de abarcar nuestro problema.\\
+Analizando los estadísticos observamos que ninguno de los nuevos algoritmos supera a la búsqueda local en el estadístico Desv. Puesto que algunas de estas metaheurísticas  utilizan por debajo una búsqueda local se nos plantea si realmente son buenas estas nuevas formas de abarcar nuestro problema.\\
 
-Si observamos las instancias de tamaño n pequeño, el algoritmo de multi arranque básico mejora siempre a la solución de la búsqueda. Esto es debido a que el número máximo de evaluaciones sobrepasa de lejos la cantidad de pasos que necesita la búsqueda local para estancarse y no poder encontrar nuevas soluciones. Esto hace que la técnica multi arranque básica sea repetir búsquedas locales casi con la misma cantidad de pasos. Sin embargo, en tamaños más grandes, apenas llegan a conseguir una profundidad adecuada. \\
+Si observamos las instancias de tamaño n pequeño, el algoritmo de multi arranque básico mejora siempre a la solución de la búsqueda. Esto es debido a que el número máximo de evaluaciones sobrepasa de lejos la cantidad de pasos que necesita la búsqueda local para estancarse y no poder encontrar nuevas soluciones. Esto hace que la técnica multi arranque básica sea repetir búsquedas locales casi con la misma cantidad de pasos. Sin embargo, en tamaños más grandes, apenas llega a conseguir una profundidad adecuada. \\
 
-Si comparamos el enfriamiento simulado con la búsqueda local, vemos que no tenemos el mismo patrón. Se obtienen mejores o peores resultados de forma aleatoria. Sin embargo, en media, obtiene peores resultados. Cabe destacar también que tiene menos tiempo de ejecución.\\
+Si comparamos el enfriamiento simulado con la búsqueda local, vemos que no tenemos el mismo patrón. Se obtienen mejores o peores resultados de forma aleatoria. Sin embargo, en media, obtiene peores resultados. Cabe destacar, aun así, que tiene menos tiempo de ejecución.\\
 
-En el algoritmo ILS pasa algo parecido a la búsqueda multi arranque básica. En instancias con un tamaño pequeño, la diversificación de las soluciones y la poca profundidad del problema hace que tenga muy buenos resultados, incluso llegando a  conseguir la solución óptima. Sin embargo, en tamaños de solución más grande, la diversidad de soluciones no compensa a las evaluaciones de menos de cada búsqueda local. Aun así, en algunos tamaños grandes se consigue igualar o superar por  poco a la solución de la búsqueda local. Para mejorar este procedimiento podríamos añadirle evaluaciones a la búsqueda local dentro del ILS y así profundizar más la búsqueda.\\
+En el algoritmo ILS pasa algo parecido a la búsqueda multi arranque básica. En instancias con un tamaño pequeño, la diversificación de las soluciones y la poca profundidad del problema hace que tenga muy buenos resultados, incluso llegando a  conseguir la solución óptima. Sin embargo, en tamaños de solución más grande, la diversidad de más de soluciones no compensa a las evaluaciones de menos de cada búsqueda local. Aun así, en algunos tamaños grandes se consigue igualar o superar por  poco a la solución de la búsqueda local. Para mejorar este procedimiento podríamos añadirle evaluaciones a la búsqueda local dentro del ILS y así profundizar más la búsqueda.\\
 
-El algoritmo GRASP tiene un contra muy importante: tarda muchísimo más de lo que tarda cualquier otra metaheurística. Dependiendo de para qué queramos el algoritmo, este será inviable. Esto es debido a que la creación de soluciones greedy aleatorizada necesita mucha capacidad de cómputo(ordena en cada paso muchas listas para obtener el menor y el mayor coste y así escoger los que no sobrepasen el umbral). Por lo demás, tiene un comportamiento parecido a los algorítmos multi arranque, mejores en tamaños pequeños por poder profundizar de la misma manera, y peor en tamaños mayores por falta de la misma. \\
+El algoritmo GRASP tiene un contra muy importante: tarda muchísimo más de lo que tarda cualquier otra metaheurística de esta práctica. Dependiendo de para qué queramos el algoritmo, este será inviable. Esto es debido a que la creación de soluciones greedy aleatorizada necesita mucha capacidad de cómputo(puntua cada posible nueva asignación sin llegar siquiera a poder usarla en próximas evaluaciones). Por lo demás, tiene un comportamiento parecido a los algorítmos multi arranque, mejores en tamaños pequeños por poder profundizar de la misma manera, y peor en tamaños mayores por falta de la misma. \\
 
 En el algiritmo híbrido ILS-ES tiene el mismo comportamiento multi arranque antes descrito. Puesto que la comparación con la búsqueda local ya se ha comentado, la vamos a comparar con el ILS sin modificación. En tamaños pequeños y por el comportamiento de salto del enfriamiento simulado, suele obtener peores resultados. Sin embargo, conforme el tamaño crece, el enfriamiento simulado le permite salir de óptimos locales dentro de la profundización que se realiza.\\
 
@@ -473,7 +472,7 @@ Durante la realización de la práctica se han comentado algunas deficiencias. A
 \begin{itemize}
 	\item \textbf{Profundidad de los algoritmos multi arranque.} Hemos pretendido que nuestras metaheurísticas abarcasen una diversidad demasiado grande en algunos de los casos y demasiado exhaustiva en otros. Una idea para mejorar esto será modificar el número de arranques y la profundidad de la misma. Esto es, cuanto más grande sea el tamaño de nuestro problema, menos multi arranques realizaremos y profundizaremos en cada uno de esos arranques.
 	
-	\item El algoritmo Greedy, con su intento de aleatorizar el proceso greedy, no tiene en cuenta que el umbral escogido es, en tamaños de n grande, nada óptimo. Ese umbral debería decrecerse cuanto más grande sea el conjunto de asignaciones.
+	\item El algoritmo Greedy, con su intento de aleatorizar el proceso greedy, no tiene en cuenta que el umbral escogido es, en tamaños de n grande, nada óptimo. Ese umbral debería decrecerse cuanto más grande sea el conjunto de asignaciones para así quedarnos con posibilidades mucho más prometedoras. También, para optimizar el proceso, se podría puntuar sólo algunas asignaciones. Esto la haría bastante más rápida.
 	
 \end{itemize}
 
