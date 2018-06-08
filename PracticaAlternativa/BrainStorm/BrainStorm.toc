@@ -5,5 +5,5 @@
 \contentsline {section}{\numberline {3}Pseudoc\IeC {\'o}digos y explicaciones.}{7}
 \contentsline {section}{\numberline {4}Demo del algortimo: Prueba con Rastrigin en dimensi\IeC {\'o}n 2.}{9}
 \contentsline {section}{\numberline {5}Experimento y an\IeC {\'a}lisis de resultados.}{11}
-\contentsline {subsection}{\numberline {5.1}An\IeC {\'a}lisis de resultados}{11}
-\contentsline {subsection}{\numberline {5.2}Posibles mejoras de los algoritmos}{11}
+\contentsline {subsection}{\numberline {5.1}An\IeC {\'a}lisis de resultados}{14}
+\contentsline {subsection}{\numberline {5.2}Posibles mejoras de los algoritmos}{18}

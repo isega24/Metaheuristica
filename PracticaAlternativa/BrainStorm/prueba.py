@@ -29,7 +29,7 @@ sup = 100.0 #bench.getLimSup()
 ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
 # Primeras ideas creadas. Ahora el algoritmo...
 nEval = 2000
-maxEvalCostFunc = 10000*dimension
+maxEvalCostFunc = 100000*dimension
 nEvalCostFunc = 0
 i = -1
 while nEvalCostFunc < maxEvalCostFunc:

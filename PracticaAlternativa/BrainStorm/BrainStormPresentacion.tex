@@ -1,0 +1,279 @@
+\documentclass{beamer}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usetheme{Warsaw}
+\useoutertheme{shadow}
+
+
+\begin{document}
+
+\begin{frame}
+    \frametitle{BrainStorm optimization}
+    \begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{blog_brainstorming}
+		\label{fig:blog_brainstorming}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization}
+	Se basa en el comportamiento humano para resolver problemas.
+	\begin{itemize}
+		\item \textbf{Generar primeras ideas sin prejuicios} 
+		\item \textbf{Agrupar ideas parecidas}
+		\item \textbf{Fusionar ideas prometedoras pero de distintos grupos}
+		\item \textbf{Intentar mejorar buenas ideas.}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization}
+	\textbf{Generación de ideas}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/0out}
+		\label{fig:0out}
+	\end{figure}
+
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Clustering.}
+	En el paper no se realiza ninguna propuesta. Aquí algunos métodos de clustering:\\
+	\begin{itemize}
+		\item Clustering por cercanía.
+		\item Clustering por centroide.
+		\item Distribución, densidad...
+	\end{itemize}
+	En el ejemplo hemos utilizado el segundo tipo, algoritmo de K-medias.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Mutación/exploración de una idea.}
+	\begin{itemize}
+		\item \textbf{Posible mutación de alguna idea.}
+		
+		\begin{itemize}
+			\item  \[X^d_{new} <-X^d_{selected} + \psi \times n(0,1) \]
+		
+			\item \[\psi = logsig\left(\dfrac{\dfrac{Max_{iter}}{2}-Curr_{iter}}{k}\right)\times random()\]
+		\end{itemize}
+		
+	\end{itemize}
+		
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Combinación de ideas prometedoras.}
+	
+	Ninguna propuesta en el paper, pero:
+	
+	\begin{itemize}
+		\item $X_{new} = \dfrac{X_1+X_2}{2}$ (Media aritmética)
+		\item $X_{new} = X_1 + F\times(X_2-X_3)$ (Recombinación diferencial)
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Procedimiento.}
+	\textbf{¿Cómo se escogen las ideas a modificar?}
+	\begin{itemize}
+		\item Los centros de cluster suelen ser la mejor opción para modificar, aunque se debe diversificar la búsqueda con las ideas del mismo cluster.
+		\item Podemos alcanzar ideas mejores a partir de explorar una idea buena o recombinando varias ideas buenas(aleatoriamente).
+		\item Los clusters con más ideas se  modificarán con más frecuencia.
+		\item Nos quedaremos con los individuos que mejoren a su idea predecesora.(Posible mejora?).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/0out}
+		\caption{Mínimo coste: 63.16. Porcentaje evaluado:0.24\% }
+		\label{fig:02out}
+	\end{figure}
+
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/3out}
+		\caption{Mínimo coste: 26.16. Porcentaje evaluado: 0.98\%}
+		\label{fig:3out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/6out}
+		\caption{Mínimo coste: 8.94 . Porcentaje evaluado: 1,96 \% }
+		\label{fig:6out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/9out}
+		\caption{Mínimo coste: 4,95 . Porcentaje evaluado:3,2\% }
+		\label{fig:9out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/12out}
+		\caption{Mínimo coste: 4,71. Porcentaje evaluado: 4,74\%}
+		\label{fig:12out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/15out}
+		\caption{Mínimo coste: 1,58. Porcentaje evaluado: 6,19\% }
+		\label{fig:15out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/18out}
+		\caption{Mínimo coste: 0.53. Porcentaje evaluado: 9.13\%}
+		\label{fig:18out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/21out}
+		\caption{Mínimo coste: 0.18.. Porcentaje evaluado:23.6\% }
+		\label{fig:21out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization.}
+	Ejemplo de ejecución en 2 dimensiones para  función de coste Rastrigin:
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{graficos/22out}
+		\caption{Mínimo coste:0,08 . Porcentaje evaluado:100\% }
+		\label{fig:23out}
+	\end{figure}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization. Selección de parámetros.}
+	
+	\begin{table}[htbp]
+		\begin{center}
+			\begin{tabular}{|l|l|}
+				\hline
+				Parámetro & Valor \\
+				\hline \hline
+				n & 100\\ \hline
+				K & 5\\ \hline
+				$c_m$ & 0.2\\ \hline
+				$c_e$ & 0.8\\ \hline
+				$c_r$ & 0.4\\ \hline
+				$c_c$ & 0.5\\ \hline
+				
+			\end{tabular}
+			\caption{Parámetros ofrecidos en el paper para el algorítmo BSO.}
+			\label{tabla:}
+		\end{center}
+	\end{table}
+	
+	
+ \end{frame}
+
+
+\begin{frame}
+	\frametitle{Brainstorm optimization: Comparación}
+	Comparaciones en el paper...
+	\begin{itemize}
+		\item  \textbf{Sphere:} $f(X)=\sum_{i=0}^{d}X_i^2$
+		\item \textbf{Rastrigin:} $f(X)=\sum_{i=0}^{d}(X_i^2-10cos(2\pi X_i)+10)$
+	\end{itemize}
+	
+	\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{TablaResultadosPaper}
+	\label{fig:TablaResultadosPaper}
+	\end{figure}
+	
+	No hemos obtenido el código, pero las pruebas no lo corroboran(algunas modificaciones realizadas).
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Brainstorm optimization: Posibles mejoras.}
+	
+	\begin{itemize}
+		\item Usar distintos métodos de clustering.
+		\item Competición de las nuevas ideas con todos sus progenitores.
+		\item Modificación de parámetros para mantener equilibrio exploración/intensificación de la búsqueda dependiendo de la dimensión.
+		\item Mutar de nuevo si la mutación ha sido exitosa. (O aplicación de la búsqueda local).
+	\end{itemize}
+\end{frame}
+
+
+
+
+\end{document}

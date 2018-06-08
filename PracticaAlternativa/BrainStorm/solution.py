@@ -59,7 +59,7 @@ def clustering(ideas,clust=5):
 
     clusters = [[] for  i in centroides]
 
-    for i in range(100):
+    for i in range(200):
         # Primero meto los puntos.
         clusters = [[] for  i in centroides]
         for idea in ideas:
