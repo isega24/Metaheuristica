@@ -30,7 +30,8 @@ print(outFile)
 inf = bench.getLimInf()
 sup = bench.getLimSup()
 costes = 0
-for ejecucion in range(25):
+nEjec = 3
+for ejecucion in range(nEjec):
     ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
     # Primeras ideas creadas. Ahora el algoritmo...
     maxEvalCostFunc = 10000*dimension
@@ -136,7 +137,7 @@ for ejecucion in range(25):
                         ideas[idea1Selected.id].cambia(idea1Selected)
                         modify+=1
 
-        if i % 1==1:
+        if i % 1 == 1:
             print(i)
             print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])-100*(idProblem+1) ))
             print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
@@ -144,10 +145,10 @@ for ejecucion in range(25):
     print("Problema:" + str(idProblem+1)+ "\titeracion:"+str(ejecucion))
 
 
-costes = costes/25
+costes = costes/nEjec
 print(costes)
 with open(outFile,'w') as f:
-    f.write(str(idProblem+1)+"\t" + str(costes) + "\n")
+    f.write(str(idProblem+1) + "\t" + str(costes) + "\n")
 
 
 
