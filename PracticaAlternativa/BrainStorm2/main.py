@@ -18,6 +18,9 @@ dimension = int(sys.argv[2])
 nIdeas = int(sys.argv[3])
 seed = int(sys.argv[4])
 nClusters = 5
+maxExplProb = 0.0
+maxCenterSelected = 0.5
+maxClusterSelection = 0.5
 random.seed(None)
 bench = Benchmark()
 def coste(array):
@@ -71,7 +74,7 @@ for ejecucion in range(nEjec):
             # Vemos si tenemos que explotar un cluster o combinar dos ideas
             # de clusters distintos.
             explotationProb = random.random()
-            if explotationProb < 0.8:
+            if explotationProb < maxExplProb:
                 # Hay que escoger un cluster con una probabilidad
                 # variable, dependiendo del numero de ideas de cada cluster.
                 ###########################################################
@@ -89,7 +92,7 @@ for ejecucion in range(nEjec):
                 selectedCluster = clusters[clusterS]
 
                 clusterSelection = random.random()
-                if clusterSelection < 0.4:
+                if clusterSelection < maxClusterSelection:
                     represent = selectedCluster.clusterRepresent()
                     represent.cambia(selectedCluster.clusterRepresent().muta(nEvalCostFunc,maxEvalCostFunc))
                     if selectedCluster.clusterRepresent().coste() < ideas[selectedCluster.clusterRepresent().id].coste():
@@ -120,7 +123,7 @@ for ejecucion in range(nEjec):
                 thirdClust = clusters[l]
 
                 centersSelected = random.random()
-                if centersSelected < 0.5:
+                if centersSelected < maxCenterSelected:
                     nueveIdee = combinationDiffEvo(firstClust.clusterRepresent(),secondClust.clusterRepresent(),thirdClust.clusterRepresent())
                     nueveIdee.id = torneo([firstClust.clusterRepresent(),secondClust.clusterRepresent(),thirdClust.clusterRepresent()],nueveIdee)
                     if nueveIdee.getId() != -1 and nueveIdee.coste() < ideas[nueveIdee.getId()].coste():
@@ -137,7 +140,7 @@ for ejecucion in range(nEjec):
                         ideas[nueveIdee.getId()].cambia(nueveIdee)
                         modify+=1
 
-        if i % 1 == 1:
+        if i % 1 == 0:
             print(i)
             print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])-100*(idProblem+1) ))
             print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")

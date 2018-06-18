@@ -29,6 +29,7 @@ def torneo(listaIdeas,nuevaIdea):
 def combinationMean(idea1,idea2):
     return Idea(np.array([ (idea1.array[i]+idea2.array[i])/2 for i in range(len(idea1.array))]),idea1.costFunc,idea1.id)
 def combinationDiffEvo(idea1,idea2,idea3):
+    dimension = len(idea1.array)
     array = np.array(idea1.array[:])
     for i in range(len(array)):
         array[i]+= (idea3.array[i]-idea2.array[i])/2

@@ -9,9 +9,11 @@ import random
 from solution import *
 
 
-dimension = 10
+dimension = 2
 nIdeas = 100
-
+maxExplProb = 0.0
+maxCenterSelected = 0.5
+maxClusterSelection = 0.5
 nClusters = 5
 random.seed(None)
 np.random.seed(None)
@@ -32,7 +34,7 @@ nEval = 2000
 maxEvalCostFunc = 100000*dimension
 
 costes = 0
-nEjec = 10
+nEjec = 25
 for ejec in range(nEjec):
     ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
     nEvalCostFunc = 0
@@ -98,7 +100,7 @@ for ejec in range(nEjec):
             # Vemos si tenemos que explotar un cluster o combinar dos ideas
             # de clusters distintos.
             explotationProb = random.random()
-            if explotationProb < 0.8:
+            if explotationProb < maxExplProb:#nEvalCostFunc/maxEvalCostFunc:
                 # Hay que escoger un cluster con una probabilidad
                 # variable, dependiendo del numero de ideas de cada cluster.
                 ###########################################################
@@ -116,7 +118,7 @@ for ejec in range(nEjec):
 
                 selectedCluster = clusters[clusterS]
                 clusterSelection = random.random()
-                if clusterSelection < 0.3:
+                if clusterSelection < maxClusterSelection:
                     represent = selectedCluster.clusterRepresent()
                     represent.cambia(selectedCluster.clusterRepresent().muta(i,nEval))
                     if selectedCluster.clusterRepresent().coste() < ideas[selectedCluster.clusterRepresent().id].coste():
@@ -157,7 +159,7 @@ for ejec in range(nEjec):
                 thirdClust = clusters[l]
 
                 centersSelected = random.random()
-                if centersSelected < 0.5:
+                if centersSelected < maxCenterSelected:
                     nueveIdee = combinationDiffEvo(firstClust.clusterRepresent(),secondClust.clusterRepresent(),thirdClust.clusterRepresent())
                     nueveIdee.id = torneo([firstClust.clusterRepresent(),secondClust.clusterRepresent(),thirdClust.clusterRepresent()],nueveIdee)
                     if nueveIdee.getId() != -1 and nueveIdee.coste() < ideas[nueveIdee.getId()].coste():
@@ -175,12 +177,12 @@ for ejec in range(nEjec):
                         modify+=1
         if i % 1==0:
             ##print(i)
-            ##print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
-            ##print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
+            print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
+            print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
             pass
 
     costes += min([idea.coste() for idea in ideas])
-    print("Ejecucion " + str(ejec) +"\tCoste medio actual:"+str(int(100.0*costes/(ejec+1))//100 ))
+    print("Ejecucion " + str(ejec) +"\tCoste medio actual:"+str(int(100.0*costes/(ejec+1))/100.0 ))
 costes /=nEjec
 
 print("Coste de media: " + str(costes))

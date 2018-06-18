@@ -163,13 +163,11 @@ for ejec in range(nEjec):
                         modify+=1
         if i % 1==0:
             ##print(i)
-
-            ##print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
-
-            ##print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
+            print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
+            print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
             pass
     costes += min([idea.coste() for idea in ideas])
-    print("Ejecucion " + str(ejec) +"\tCoste medio actual:"+str(int(100.0costes/(ejec+1))//100 ))
+    print("Ejecucion " + str(ejec) +"\tCoste medio actual:"+str(int(100.0*costes/(ejec+1))//100 ))
 costes /=nEjec
 
 print("Coste de media: " + str(costes))
