@@ -34,7 +34,7 @@ nEval = 2000
 maxEvalCostFunc = 100000*dimension
 
 costes = 0
-nEjec = 25
+nEjec = 1
 for ejec in range(nEjec):
     ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
     nEvalCostFunc = 0
@@ -100,7 +100,7 @@ for ejec in range(nEjec):
             # Vemos si tenemos que explotar un cluster o combinar dos ideas
             # de clusters distintos.
             explotationProb = random.random()
-            if explotationProb < maxExplProb:#nEvalCostFunc/maxEvalCostFunc:
+            if explotationProb < maxExplProb or nEvalCostFunc > maxEvalCostFunc*0.8 :#nEvalCostFunc/maxEvalCostFunc:
                 # Hay que escoger un cluster con una probabilidad
                 # variable, dependiendo del numero de ideas de cada cluster.
                 ###########################################################
@@ -176,7 +176,7 @@ for ejec in range(nEjec):
                         ideas[nueveIdee.getId()].cambia(nueveIdee)
                         modify+=1
         if i % 1==0:
-            ##print(i)
+            print(i)
             print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
             print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
             pass

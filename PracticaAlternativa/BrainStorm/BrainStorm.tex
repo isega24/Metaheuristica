@@ -479,7 +479,7 @@ Tras observar los resultados en dimensiones 30 y 50 nos damos cuenta que la supe
 \subsection{Posibles mejoras de los algoritmos}
 A continuación se proponen distintas formas de llegar a mejorar la metaheuristica BSO.
 \begin{itemize}
-	\item La primera mejora que hemos aplicado en la práctica es el uso del cruce de Differential Evolution. En el paper no daban ninguna idea de cómo habían implementado ellos esta parte.
+	\item La primera mejora que hemos aplicado en la práctica es el uso del cruce de Differential Evolution. En el paper no daban ninguna idea de cómo se había implementado esta parte.
 	
 	\item El algoritmo de clustering se puede llegar a cambiar por otras técnicas.
 	
@@ -495,12 +495,171 @@ A continuación se proponen distintas formas de llegar a mejorar la metaheuristi
 Cabe destacar también por qué la aplicación de búsquedas locales no las considero:
 
 \begin{itemize}
-	\item En el propio algoritmo, con la mutación ofrecida y la característica de reemplazo directo del algoritmo, ya se está aplicando búsqueda local. Una idea no será reemplazada por una peor en ningún caso. 
+	\item En el propio algoritmo, con la mutación ofrecida y la característica de reemplazo directo del algoritmo, ya se está aplicando búsqueda local. Una idea no será reemplazada por una peor en ningún caso.
 	
 	\item Tras una serie de pruebas hemos visto que el algoritmo genera rápido $N$ nuevas ideas al principio pero que conforme avanza, gasta alrededor del 50\% de las evaluaciones en la última generación(en las pruebas de dimensión 2). En esta etapa alrededor de la mitad de las veces probará a mutar soluciones. Puesto que no se han generado nuevos individuos en esta última etapa, es lógico pensar que las mutaciones no han tenido éxito, nos encontramos en un óptimo local. La búsqueda local intensificaría este comportamiento y quitaría diversidad al algoritmo.
 \end{itemize}
 
 \newpage
+
+\section{Mejora del algoritmo: supresión de la Local Search.}
+
+La mejora que hemos realizado en esta metaheurística se basa en eliminar la búsqueda local del algoritmo. Esto lo hacemos porque al detectar cuantas evaluaciones de la función objetivo se realizan en las últimas generaciones de ideas se intuye que se han alcanzado muy rápido mínimos locales. La siguiente tabla expresa en porcentaje cuantas evaluaciones se han realizado en cada generación. Se ha utilizado como prueba la función Rastrigin con dimensión 10	. La solución óptima es 0 de coste y se ha alcanzado una solución aproximada con 0.02 de coste. \\
+
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|}
+			\hline
+			Generación & Evaluaciones(en \%) \\
+			\hline \hline
+			1 & 0,22\% \\ \hline
+			2 & 0,24\% \\ \hline
+			3 & 0,28\% \\ \hline
+			4 & 0,23\% \\ \hline
+			5 & 0,27\% \\ \hline
+			6 & 0,3\% \\ \hline
+			7 & 0,35\% \\ \hline
+			8 & 0,36\% \\ \hline
+			9 & 0,45\% \\ \hline
+			10 & 0,36\% \\ \hline
+			11 & 0,44\% \\ \hline
+			12 & 0,48\% \\ \hline
+			13 & 0,6\% \\ \hline
+			14 & 0,49\% \\ \hline
+			15 & 0,5\% \\ \hline
+			16 & 0,63\% \\ \hline
+			17 & 0,86\% \\ \hline
+			18 & 1,24\% \\ \hline
+			19 & 1,8\% \\ \hline
+			20 & 2,11\% \\ \hline
+			21 & 4,1\% \\ \hline
+			22 & 9,86\% \\ \hline
+			23 & 73,83\% \\ \hline
+			
+		\end{tabular}
+		\caption{Evaluaciones en cada generación.}
+		\label{tabla:evaluacionesGeneraciones}
+	\end{center}
+\end{table}
+
+Como se ve, cada vez se utilizan más recursos para generar soluciones que superen a las anteriores. Que se utilice casi un 75\% en la última generación sin haber mejorado el coste en ella hace pensar que se está intensificando en la primera parte de la búsqueda, haciendo que se caiga muy rápido en óptimos locales, haciendo muy difícil encontrar mejoras en la última parte.\\
+
+La solución ha sido eliminar la intensificación del proceso. Hemos eliminado la búsqueda local del proceso, dejando el cruce como único método de intensificación. Estos son los resultados:\\
+
+\newpage
+
+\textbf{Dimensión 10 para BSO modificado}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			Problema & BSO modificado & BSO \\
+			\hline \hline
+			1 & 0.2679890543446149 & 1265211.2708735103 \\ \hline
+			2 & 2.1570414588580404 & 124257214.3985153 \\ \hline
+			3 & 0.22412810975005187 & 10232.610440041128 \\ \hline
+			4 & 1.9090914306066735 & 58.13239054020244 \\ \hline
+			5 & 20.408823590552878 & 20.32740178294993 \\ \hline
+			6 & 6.751185137027687 & 8.40452732708411 \\ \hline
+			7 & 1.1397454501885704 & 3.044016888423471 \\ \hline
+			8 & 32.19046738103013 & 34.41642463494247 \\ \hline
+			9 & 35.29849329835762 & 29.8563195831656 \\ \hline
+			10 & 1213.204618479243 & 900.1460148928796 \\ \hline
+			11 & 1342.165070683098 & 983.0679398824409 \\ \hline
+			12 & 1.2523730223448637 & 0.9669699551560976 \\ \hline
+			13 & 0.6460073105470883 & 0.46540283873931304 \\ \hline
+			14 & 0.33488421780248245 & 0.43721316558495954  \\ \hline
+			15 & 3.052633034431733 & 8.546326972828638 \\ \hline
+			16 & 3.7088893167144077 & 3.4219304208140784 \\ \hline
+			17 & 117.92606544289349 & 2783.773820739943 \\ \hline
+			18 & 6.328659766596388 & 1548.1296642291472 \\ \hline
+			19 & 2.58345590416493 & 4.575898594236302 \\ \hline
+			20 & 4.355677832718288 & 986.572310128658 \\ \hline
+		\end{tabular}
+		\caption{Comparación de BSO modificado con las MH del cec2014. Dimensión 10}
+		\label{tabla:Dimension10MejoraComparativa}
+	\end{center}
+\end{table}
+
+En esta tabla se ve que los resultados no son tan buenos como esperábamos. Lo hemos comparado con los resultados del algoritmo. Aun así, en los algoritmos de las funciones en las que se tiene mejor puntuación, se tiene por mucho. Veamos que ocurre en dimensión 30:\\
+
+
+\newpage
+
+\textbf{Dimensión 30 para BSO modificado}
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			Problema & BSO modificado & BSO \\
+			\hline \hline
+			1 & 13815981.886975884 & 36117593.8280701 \\ \hline
+			2 & 2869777164.7672057 & 1692500371.9150054 \\ \hline
+			3 & 5787.120714928398 & 75373.58196003502 \\ \hline
+			4 & 292.34395544260286 & 417.26193349118995 \\ \hline
+			5 & 21.000826018844396 & 20.90500798103498 \\ \hline
+			6 & 30.5211485350963 & 33.72474548324677 \\ \hline
+			7 & 32.02080606746567 & 26.438102854568456 \\ \hline
+			8 & 207.98704083144065 & 229.54411439825205 \\ \hline
+			9 & 208.55663785454135 & 261.93997580505965 \\ \hline
+			10 & 6899.381068037357 & 6417.241329247775 \\ \hline
+			11 & 7213.913960876094 & 6627.499236146529 \\ \hline
+			12 & 2.577577595592538 & 2.2850500533030904 \\ \hline
+			13 & 1.7585444978653642 & 0.7294371883645757 \\ \hline
+			14 & 7.541994873060025 & 4.8163781677099 \\ \hline
+			15 & 34.74899304334383 & 207.65959839409416 \\ \hline
+			16 & 13.381985939375795 & 12.79164368592319 \\ \hline
+			17 & 1511.335034540944 & 480456.1434857465 \\ \hline
+			18 & 86.63425186811703 & 1462883.8319724433 \\ \hline
+			19 & 8.938992939342711 & 34.56100872447291 \\ \hline
+			20 & 55.89107566153052 & 17566.89871727154 \\ \hline
+		\end{tabular}
+		\caption{Comparación de BSO modificado con las MH del cec2014. Dimensión 10}
+		\label{tabla:Dimension30MejoraComparativa}
+	\end{center}
+\end{table}
+
+La completa falta de intensificación en el algoritmo tampoco ofrece una mejora considerable en dimensiones grandes. Sin embargo, sigue ofreciendo costes mucho menores en algunos casos. Quizás debamos utilizar la intensificación en una segunda fase hipotética del algoritmo, en la fase final. Aquí dejamos las comparativas de dimensión 10 de los algoritmos del cec14 con esta nueva versión del algoritmo:\\
+
+\newpage
+
+\begin{table}[htbp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			Mínimo & Máximo & BSO \\
+			\hline \hline
+			0 & 8810740 & 731803,194310743 \\ \hline
+			0 & 224053205,940771 & 74497204,3215033 \\ \hline
+			0 & 6643,67 & 8897,2278282812 \\ \hline
+			0 & 52,5332862745 & 66,3409061102 \\ \hline
+			13,6519611765 & 20,2129862745 & 20,4042840546\\ \hline
+			0 & 3,0166234 & 8,1117725686\\ \hline
+			0 & 3,3068928078 & 1,9737411053\\ \hline
+			0 & 18,904 & 29,1640036507\\ \hline
+			2,344597678 & 21,0368678431 & 27,1556003416\\ \hline
+			0,0085721782 & 330,8470785997 & 999,0282517068\\ \hline
+			20,1349725373 & 782,9861372549 & 1496,061879948\\ \hline
+			0 & 0,8030774706 & 0,9494295338\\ \hline
+			0,0094357808 & 0,4161575699 & 0,4953625289\\ \hline
+			0,081361704 & 0,6884131745 & 0,376404398\\ \hline
+			0,3660991591 & 47,0112827255 & 5,8196928933\\ \hline
+			1,054166198 & 2,8261445098 & 3,6320886826\\ \hline
+			0,9766637611 & 3122910 & 2921,6764508118\\ \hline
+			0,2440927767 & 225413,487599239 & 1327,892909848\\ \hline
+			0,0766073275 & 2,3744214902 & 4,2782585716\\ \hline
+			0,1848826079 & 9364,2 & 566,1684495604\\ \hline
+			
+			
+		\end{tabular}
+		\caption{Comparacin de BSO mejorado con las MH del cec2014. Dimensión 10}
+		\label{tabla:Dimension10MejoradaComparativa}
+	\end{center}
+\end{table}
+
+\newpage
+
+
 \begin{thebibliography}{9}
 	\bibitem{BSO} 2011 - BSO (IJSIR) -Brain Storm Optimization Algorithm\\
 	

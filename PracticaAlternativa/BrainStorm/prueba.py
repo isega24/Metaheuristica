@@ -9,7 +9,7 @@ import random
 from solution import *
 
 
-dimension = 10
+dimension = 2
 nIdeas = 100
 
 nClusters = 5
@@ -32,7 +32,7 @@ nEval = 2000
 maxEvalCostFunc = 100000*dimension
 
 costes = 0
-nEjec = 10
+nEjec = 1
 for ejec in range(nEjec):
     ideas = [Idea.randIdea(coste,i,dimension,inf,sup) for i in range(nIdeas)]
     nEvalCostFunc = 0
@@ -162,7 +162,7 @@ for ejec in range(nEjec):
                         ideas[idea1Selected.id].cambia(idea1Selected)
                         modify+=1
         if i % 1==0:
-            ##print(i)
+            print(i)
             print("Mejor coste hasta ahora: "+str(min([idea.coste() for idea in ideas])))
             print(str(nEvalCostFunc/maxEvalCostFunc*100.0)+"%  realizado")
             pass
